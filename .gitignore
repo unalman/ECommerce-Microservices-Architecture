@@ -1,0 +1,14 @@
+# Ýþletim sistemi dosyalarý
+*.log
+*.tmp
+
+# IDE klasörleri (örneðin VSCode)
+.vscode/
+.vs/
+
+# Build klasörleri
+bin/
+obj/
+
+# Node gibi projelerde modüller
+node_modules/
