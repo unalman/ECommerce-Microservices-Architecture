@@ -26,6 +26,12 @@ namespace EventBus.RabbitMQ
                 });
 
                 connectionfactory = JsonConvert.DeserializeObject<ConnectionFactory>(connJson);
+
+                if (config.Connection is ConnectionFactory connectionFactory)
+                {
+                    connectionfactory.UserName = connectionFactory.UserName;
+                    connectionfactory.Password = connectionFactory.Password;
+                }
             }
             else
                 connectionfactory = new ConnectionFactory();

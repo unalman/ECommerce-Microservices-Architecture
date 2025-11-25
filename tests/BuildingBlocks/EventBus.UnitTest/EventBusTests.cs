@@ -43,13 +43,13 @@ namespace EventBus.UnitTest
                 DefaultTopicName = "EcommerceExchangeTopicName",
                 EventBusType = EventBusType.RabbitMQ,
                 EventNameSuffix = "IntegrationEvent",
-                //Connection = new ConnectionFactory()
-                //{
-                //    HostName = "localhost",
-                //    Port = 5672,
-                //    UserName = "guest",
-                //    Password = "guest"
-                //}
+                Connection = new ConnectionFactory()
+                {
+                    HostName = "localhost",
+                    Port = 5672,
+                    UserName = "unal",
+                    Password = "unal"
+                }
             };
         }
         [TestMethod]

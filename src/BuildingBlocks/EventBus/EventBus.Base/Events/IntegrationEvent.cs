@@ -2,7 +2,7 @@
 
 namespace EventBus.Base.Events
 {
-    public class IntegrationEvent
+    public record IntegrationEvent
     {
         [JsonProperty]
         public Guid Id { get; private set; }
