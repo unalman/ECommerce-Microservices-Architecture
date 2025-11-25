@@ -70,7 +70,7 @@ namespace EventBus.RabbitMQ
             await consumerChannel.ExchangeDeclareAsync(exchange: EventBusConfig.DefaultTopicName, type: "direct");
 
             var message = JsonConvert.SerializeObject(@event);
-            //var message = "{\"Test\":\"hello\"}";
+
             var body = Encoding.UTF8.GetBytes(message);
 
             policy.Execute(async () =>
@@ -78,7 +78,7 @@ namespace EventBus.RabbitMQ
                 var properties = new BasicProperties();
                 properties.DeliveryMode = DeliveryModes.Persistent;
 
-                await consumerChannel.QueueDeclareAsync(queue: GetSubName(eventName), durable: true, exclusive: false, autoDelete: false, arguments: null);
+                //await consumerChannel.QueueDeclareAsync(queue: GetSubName(eventName), durable: true, exclusive: false, autoDelete: false, arguments: null);
 
                 await consumerChannel.BasicPublishAsync(exchange: EventBusConfig.DefaultTopicName, routingKey: eventName, mandatory: true, basicProperties: properties, body: body);
             });
