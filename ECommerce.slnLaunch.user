@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\Services\\PaymentService\\PaymentService.Api\\PaymentService.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Services\\NotificationService\\NotificationService\\NotificationService.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
