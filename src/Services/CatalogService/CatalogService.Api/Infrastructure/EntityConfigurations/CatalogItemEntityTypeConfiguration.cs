@@ -1,7 +1,6 @@
 ﻿using CatalogService.Api.Core.Domain;
 using CatalogService.Api.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CatalogService.Api.Infrastructure.EntityConfigurations

@@ -7,7 +7,6 @@ using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EventBus.RabbitMQ
 {

@@ -6,7 +6,6 @@ using EventBus.UnitTest.Events.Events;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using System.Threading.Tasks;
 
 namespace EventBus.UnitTest
 {

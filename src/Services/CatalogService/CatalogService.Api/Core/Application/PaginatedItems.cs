@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace CatalogService.Api.Core.Application
+﻿namespace CatalogService.Api.Core.Application
 {
     public class PaginatedItems<TEntity>(int pageIndex, int pageSize, long count, IEnumerable<TEntity> data) where TEntity : class
     {

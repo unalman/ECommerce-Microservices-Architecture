@@ -2,9 +2,7 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
-using System;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 
 namespace EventBus.RabbitMQ
 {
@@ -16,7 +14,7 @@ namespace EventBus.RabbitMQ
         private object lock_object = new object();
         private bool _disposed;
 
-        public RabbitMQPersistentConnection(IConnectionFactory connectionFactory,int retryCount = 5)
+        public RabbitMQPersistentConnection(IConnectionFactory connectionFactory, int retryCount = 5)
         {
             this.connectionFactory = connectionFactory;
             this.retryCount = retryCount;
@@ -41,7 +39,7 @@ namespace EventBus.RabbitMQ
                     .Or<BrokerUnreachableException>()
                     .WaitAndRetry(retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) => { }
                 );
-                policy.Execute( () =>
+                policy.Execute(() =>
                 {
                     connection = connectionFactory.CreateConnectionAsync().GetAwaiter().GetResult();
                 });

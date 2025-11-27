@@ -5,8 +5,6 @@ using EventBus.Base.Events;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace EventBus.AzureServiceBus
 {

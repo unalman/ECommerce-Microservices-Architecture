@@ -10,7 +10,7 @@ namespace CatalogService.Api.Infrastructure.EntityConfigurations
         public void Configure(EntityTypeBuilder<CatalogBrand> builder)
         {
             builder.ToTable("CatalogBrand", CatalogContext.DEFAULT_SCHEMA);
-        
+
             builder.Property(x => x.Id)
                 .UseHiLo("catalog_brand_hilo", CatalogContext.DEFAULT_SCHEMA)
                 .IsRequired();

@@ -15,7 +15,7 @@ namespace CatalogService.Api.Infrastructure.EntityConfigurations
                 .UseHiLo("catalog_hilo", CatalogContext.DEFAULT_SCHEMA)
                 .IsRequired();
 
-            builder.Property(x=>x.Type)
+            builder.Property(x => x.Type)
                 .IsRequired();
         }
     }
