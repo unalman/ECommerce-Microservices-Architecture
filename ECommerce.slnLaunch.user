@@ -1,6 +1,15 @@
 [
   {
     "Name": "New Profile",
-    "Projects": []
+    "Projects": [
+      {
+        "Path": "src\\Services\\IdentityService\\IdentityService.Api\\IdentityService.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Services\\BasketService\\BasketService.Api\\BasketService.Api.csproj",
+        "Action": "Start"
+      }
+    ]
   }
 ]

@@ -7,7 +7,6 @@ namespace IdentityService.Api.Services
     public class EFLoginService(UserManager<ApplicationUser> _userManager,
         SignInManager<ApplicationUser> _signInManager) : ILoginService<ApplicationUser>
     {
-
         public async Task<ApplicationUser?> FindByUsername(string user)
         {
             return await _userManager.FindByNameAsync(user);
@@ -32,7 +31,5 @@ namespace IdentityService.Api.Services
         {
             return _signInManager.SignInAsync(user, properties, authenticationMethod);
         }
-
-
     }
 }

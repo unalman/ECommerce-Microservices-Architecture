@@ -1,0 +1,7 @@
+
+BasketService -> 5200
+CatalogService -> 5201
+IdentityService -> 5202
+OrderService -> 5203
+PaymentService -> 5204
+WebApiGateway -> 5205

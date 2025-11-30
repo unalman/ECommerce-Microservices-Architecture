@@ -1,0 +1,51 @@
+﻿using BasketService.Api.Core.Domain;
+using StackExchange.Redis;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace BasketService.Api.Core.Application.Repository
+{
+    public class RedisBasketRepository(ILogger<RedisBasketRepository> logger, IConnectionMultiplexer redis) : IBasketRepository
+    {
+        private readonly IDatabase _database = redis.GetDatabase();
+
+        private static RedisKey BasketKeyPrefix = "/basket/"u8.ToArray();
+
+        private static RedisKey GetBasketKey(string userId) => BasketKeyPrefix.Append(userId);
+
+        public async Task<bool> DeleteBasketAsync(string id)
+        {
+            return await _database.KeyDeleteAsync(id);
+        }
+
+        public async Task<CustomerBasket> GetBasketAsync(string customerId)
+        {
+            using var data = await _database.StringGetLeaseAsync(GetBasketKey(customerId));
+            if (data is null || data.Length == 0)
+            {
+                return null;
+            }
+            return JsonSerializer.Deserialize(data.Span, BasketSerializationContext.Default.CustomerBasket);
+        }
+
+        public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
+        {
+            var json = JsonSerializer.SerializeToUtf8Bytes(basket, BasketSerializationContext.Default.CustomerBasket);
+            var created = await _database.StringSetAsync(basket.BuyerId, json);
+            if (!created)
+            {
+                logger.LogInformation("Problem occured persisting the item.");
+                return null;
+            }
+
+            logger.LogInformation("Basket item persisted successfully");
+            return await GetBasketAsync(basket.BuyerId);
+        }
+    }
+    [JsonSerializable(typeof(CustomerBasket))]
+    [JsonSourceGenerationOptions(PropertyNameCaseInsensitive = true)]
+    public partial class BasketSerializationContext : JsonSerializerContext
+    {
+
+    }
+}

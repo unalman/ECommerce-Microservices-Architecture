@@ -77,6 +77,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.UnitTest", "tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "src\Services\ServiceDefaults\ServiceDefaults.csproj", "{F653E6A8-4F33-4E3E-A0AD-9F7028977456}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketService.UnitTest", "tests\BasketService.UnitTest\BasketService.UnitTest.csproj", "{DCC0C737-114A-4794-A3A7-33C5EF46F068}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,10 @@ Global
 		{F653E6A8-4F33-4E3E-A0AD-9F7028977456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F653E6A8-4F33-4E3E-A0AD-9F7028977456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F653E6A8-4F33-4E3E-A0AD-9F7028977456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC0C737-114A-4794-A3A7-33C5EF46F068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC0C737-114A-4794-A3A7-33C5EF46F068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC0C737-114A-4794-A3A7-33C5EF46F068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC0C737-114A-4794-A3A7-33C5EF46F068}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +193,7 @@ Global
 		{FE28D8E2-CBFC-4D02-AA28-1D4B43135468} = {17ABC0C7-3129-4AD6-B7DE-8DD8E5AC0F19}
 		{C05B3F1B-21E4-434E-8965-133E54699966} = {FE28D8E2-CBFC-4D02-AA28-1D4B43135468}
 		{F653E6A8-4F33-4E3E-A0AD-9F7028977456} = {A9398FA0-680E-4775-93A7-82ECC3AB4C18}
+		{DCC0C737-114A-4794-A3A7-33C5EF46F068} = {17ABC0C7-3129-4AD6-B7DE-8DD8E5AC0F19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D31A4A15-774D-45B1-AAC2-687B4AB2577D}
