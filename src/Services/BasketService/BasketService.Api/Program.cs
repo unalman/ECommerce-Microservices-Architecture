@@ -1,11 +1,9 @@
 using BasketService.Api.Extensions;
-using BasketService.Api.Grpc;
 using BasketService.Api.IntegrationEvents.EventHandlers;
 using BasketService.Api.IntegrationEvents.Events;
 using EventBus.Base;
 using EventBus.Base.Abstraction;
 using EventBus.Factory;
-using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using RabbitMQ.Client;
 using StackExchange.Redis;

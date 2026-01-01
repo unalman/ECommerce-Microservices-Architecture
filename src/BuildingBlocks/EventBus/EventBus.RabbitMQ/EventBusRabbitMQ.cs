@@ -43,7 +43,7 @@ namespace EventBus.RabbitMQ
 
         private void SubsManager_OnEventRemoved(object? sender, string eventName)
         {
-            eventName = ProcessEventName(eventName);
+            //eventName = ProcessEventName(eventName);
 
             if (!persistentConnection.IsConnected)
                 persistentConnection.TryConnect();
@@ -64,7 +64,7 @@ namespace EventBus.RabbitMQ
                    .WaitAndRetry(EventBusConfig.ConnectionRetryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) => { });
 
             var eventName = @event.GetType().Name;
-            eventName = ProcessEventName(eventName);
+            //eventName = ProcessEventName(eventName);
 
             await consumerChannel.ExchangeDeclareAsync(exchange: EventBusConfig.DefaultTopicName, type: "direct");
 
@@ -86,7 +86,7 @@ namespace EventBus.RabbitMQ
         public override async Task Subscribe<T, TH>(CancellationToken cancellationToken = default)
         {
             var eventName = typeof(T).Name;
-            eventName = ProcessEventName(eventName);
+            //eventName = ProcessEventName(eventName);
 
             if (!SubsManager.HasSubscriptionForEvent(eventName))
             {
@@ -133,7 +133,7 @@ namespace EventBus.RabbitMQ
         private async Task Consumer_ReceivedAsync(object sender, BasicDeliverEventArgs @event)
         {
             var eventName = @event.RoutingKey;
-            eventName = ProcessEventName(eventName);
+            //eventName = ProcessEventName(eventName);
             var message = Encoding.UTF8.GetString(@event.Body.Span);
             try
             {

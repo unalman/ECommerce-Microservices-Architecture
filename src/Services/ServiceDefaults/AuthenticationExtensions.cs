@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -10,7 +9,8 @@ namespace ServiceDefaults
 {
     public static class AuthenticationExtensions
     {
-        public static IServiceCollection AddDefaultAuthentication(this IHostApplicationBuilder builder) {
+        public static IServiceCollection AddDefaultAuthentication(this IHostApplicationBuilder builder)
+        {
             var services = builder.Services;
             var configuration = builder.Configuration;
 
@@ -32,7 +32,8 @@ namespace ServiceDefaults
             // prevent from mapping "sub" claim to nameidentifier.
             JsonWebTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 
-            services.AddAuthentication().AddJwtBearer(options => {
+            services.AddAuthentication().AddJwtBearer(options =>
+            {
                 //var identityUrl = identitySection.GetRequiredValue("Url");
                 //var audience = identitySection.GetRequiredValue("Audience");
 

@@ -1,8 +1,5 @@
 ﻿using BasketService.Api.Core.Application.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using ServiceDefaults;
-using System.Text;
 
 namespace BasketService.Api.Extensions
 {

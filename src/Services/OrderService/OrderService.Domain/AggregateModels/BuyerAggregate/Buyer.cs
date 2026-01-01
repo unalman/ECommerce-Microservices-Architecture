@@ -38,6 +38,9 @@ namespace OrderService.Domain.AggregateModels.BuyerAggregate
 
             var payment = new PaymentMethod(cardTypeId, alias, cardNumber, securityNumber, cardHolderName, expiration);
             _paymentMethods.Add(payment);
+
+            AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(this, payment, orderId));
+
             return payment;
         }
 

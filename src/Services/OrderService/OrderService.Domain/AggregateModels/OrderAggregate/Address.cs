@@ -27,7 +27,7 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
             yield return City;
             yield return State;
             yield return Country;
-            yield return ZipCode;\
+            yield return ZipCode;
         }
     }
 }

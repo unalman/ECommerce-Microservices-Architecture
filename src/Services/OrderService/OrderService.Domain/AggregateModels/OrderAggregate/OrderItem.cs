@@ -44,7 +44,8 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
             PictureUrl = pictureUrl;
         }
 
-        public void SetNewDiscount(decimal discount) {
+        public void SetNewDiscount(decimal discount)
+        {
             if (discount < 0)
             {
                 throw new OrderingDomainException("Discount is not valid");

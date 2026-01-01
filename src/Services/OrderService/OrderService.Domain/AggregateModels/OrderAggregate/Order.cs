@@ -1,5 +1,6 @@
 ﻿using OrderService.Domain.AggregateModels.BuyerAggregate;
 using OrderService.Domain.Events;
+using OrderService.Domain.Exceptions;
 using OrderService.Domain.SeedWork;
 using System.ComponentModel.DataAnnotations;
 
@@ -60,6 +61,60 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
                                                                         cardHolderName, cardExpiration);
 
             this.AddDomainEvent(orderStartedDomainEvent);
+        }
+
+        public void AddOrderItem(int productId, string productName, decimal unitPrice, decimal discount, string pictureUrl, int units = 1)
+        {
+            var existingOrderForProduct = _orderItems.SingleOrDefault(x => x.ProductId == productId);
+            if (existingOrderForProduct != null)
+            {
+                if (discount > existingOrderForProduct.Discount)
+                    existingOrderForProduct.SetNewDiscount(discount);
+
+                existingOrderForProduct.AddUnits(units);
+            }
+            else
+            {
+                var orderItem = new OrderItem(productId, productName, unitPrice, discount, pictureUrl, units);
+                _orderItems.Add(orderItem);
+            }
+        }
+
+        public void SetPaymentMethodVerified(int buyerId, int paymentId)
+        {
+            BuyerId = buyerId;
+            PaymentId = paymentId;
+        }
+
+        public void SetCancelledStatus()
+        {
+            if (OrderStatus == OrderStatus.Paid || OrderStatus == OrderStatus.Shipped)
+            {
+                StatusChangeException(OrderStatus.Cancelled);
+            }
+
+            OrderStatus = OrderStatus.Cancelled;
+            Description = "The order was cancelled";
+            AddDomainEvent(new OrderCancelledDomainEvent(this));
+        }
+
+        public void SetShippedStatus()
+        {
+            if (OrderStatus != OrderStatus.Paid)
+            {
+                StatusChangeException(OrderStatus.Shipped);
+            }
+
+            OrderStatus = OrderStatus.Shipped;
+            Description = "The order was shipped";
+            AddDomainEvent(new OrderShippedDomainEvent(this));
+        }
+
+        public decimal GetTotal() => _orderItems.Sum(o => o.Units * o.UnitPrice);
+
+        private void StatusChangeException(OrderStatus orderStatusToChange)
+        {
+            throw new OrderingDomainException($"Is not possible to change the order status from {OrderStatus} to {orderStatusToChange}.");
         }
     }
 }

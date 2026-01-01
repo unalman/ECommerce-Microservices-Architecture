@@ -1,0 +1,76 @@
+﻿using EventBus.Base.Abstraction;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using OrderService.Api.Application.IntegrationEvents;
+using OrderService.Api.Application.IntegrationEvents.Events;
+using OrderService.Api.Infrastructure.Services;
+using OrderService.Domain.AggregateModels.OrderAggregate;
+using OrderService.Infrastructure;
+using OrderService.Infrastructure.Idempotency;
+using System.Diagnostics;
+
+namespace OrderService.Api.Application.Commands
+{
+    public class CreateOrderCommandHandler
+        : IRequestHandler<CreateOrderCommand, bool>
+    {
+        private readonly IOrderRepository _orderRepository;
+        private readonly IIdentityService _identityService;
+        private readonly IMediator _mediator;
+        private readonly IOrderingIntegrationEventService _orderingIntegrationEventService;
+        private readonly ILogger<CreateOrderCommandHandler> _logger;
+
+        public CreateOrderCommandHandler(IOrderRepository orderRepository,
+            IIdentityService identityService,
+            IMediator mediator,
+            IEventBus eventBus,
+            IOrderingIntegrationEventService orderingIntegrationEventService,
+            ILogger<CreateOrderCommandHandler> logger)
+        {
+            _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
+            _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _orderingIntegrationEventService = orderingIntegrationEventService ?? throw new ArgumentNullException(nameof(orderingIntegrationEventService));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        public async Task<bool> Handle(CreateOrderCommand message, CancellationToken cancellationToken)
+        {
+            var orderStartedIntegrationEvent = new OrderStartedIntegrationEvent(message.UserId);
+            await _orderingIntegrationEventService.AddAndSaveEventAsync(orderStartedIntegrationEvent);
+
+            var address = new Address(message.Street, message.City, message.State, message.Country, message.ZipCode);
+            var order = new Order(message.UserId, message.UserName, address, message.CardTypeId, message.CardNumber, message.CardSecurityNumber, message.CardHolderName, message.CardExpiration);
+            foreach (var item in message.OrderItems)
+            {
+                order.AddOrderItem(item.ProductId, item.ProductName, item.UnitPrice, item.Discount, item.PictureUrl, item.Units);
+            }
+            _logger.LogInformation("Creating Order - Order: {@Order}", order);
+
+            _orderRepository.Add(order);
+
+            await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+
+            return true;
+        }
+    }
+
+    // Use for Idempotency in Command process
+    public class CreateOrderIdentifiedCommandHandler : IdentifiedCommandHandler<CreateOrderCommand, bool>
+    {
+        public CreateOrderIdentifiedCommandHandler(
+            IMediator mediator,
+            IRequestManager requestManager,
+            ILogger<IdentifiedCommandHandler<CreateOrderCommand, bool>> logger)
+            : base(mediator, requestManager, logger)
+        {
+        }
+
+        protected override bool CreateResultForDuplicateRequest()
+        {
+            return true; // Ignore duplicate requests for creating order.
+        }
+    }
+
+}

@@ -1,13 +1,13 @@
 ﻿using BasketService.Api.Core.Application.Repository;
+using BasketService.Api.Core.Domain;
 using BasketService.UnitTest.Helpers;
 using ECommerce.BasketService.Api.Grpc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
-using GrpcBasketService = BasketService.Api.Grpc.BasketService;
-using BasketItem = BasketService.Api.Core.Domain.BasketItem;
-using BasketService.Api.Core.Domain;
 using System.Security.Claims;
+using BasketItem = BasketService.Api.Core.Domain.BasketItem;
+using GrpcBasketService = BasketService.Api.Grpc.BasketService;
 
 
 namespace BasketService.UnitTest;
