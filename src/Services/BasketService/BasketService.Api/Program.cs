@@ -35,7 +35,7 @@ builder.Services.AddSingleton<IEventBus>(sp =>
     return EventBusFactory.Create(config, sp);
 });
 
-builder.Services.AddTransient<OrderCreatedIntegrationEventHandler>();
+builder.Services.AddTransient<OrderStartedIntegrationEventHandler>();
 
 builder.Services.AddGrpc();
 
@@ -61,7 +61,7 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 
 IEventBus eventBus = app.Services.GetRequiredService<IEventBus>();
-await eventBus.Subscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
+await eventBus.Subscribe<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

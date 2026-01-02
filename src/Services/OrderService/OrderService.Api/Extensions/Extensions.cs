@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IntegrationEventLogEF.Services;
+using Microsoft.EntityFrameworkCore;
 using OrderService.Api.Application.Behaviors;
+using OrderService.Api.Application.IntegrationEvents;
 using OrderService.Api.Application.Queries;
 using OrderService.Api.Infrastructure;
 using OrderService.Api.Infrastructure.Services;
@@ -26,6 +28,10 @@ namespace OrderService.Api.Extensions
 
             if (builder.Environment.IsDevelopment())
                 services.AddMigration<OrderingContext, OrderingContextSeed>();
+
+            services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<OrderingContext>>();
+
+            services.AddTransient<IOrderingIntegrationEventService, OrderingIntegrationEventService>();
 
             services.AddHttpContextAccessor();
             services.AddTransient<IIdentityService, IdentityService>();

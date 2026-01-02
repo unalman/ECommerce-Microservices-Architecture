@@ -48,7 +48,7 @@ namespace EventBus.AzureServiceBus
         public override async Task Publish(IntegrationEvent @event, CancellationToken cancellationToken = default)
         {
             var eventName = @event.GetType().Name; // example: OrderCreatedIntegrationEvent
-            eventName = ProcessEventName(eventName);// example: OrderCreated
+            //eventName = ProcessEventName(eventName);// example: OrderCreated
 
             var evetStr = JsonConvert.SerializeObject(@event);
             var bodyArr = Encoding.UTF8.GetBytes(evetStr);
@@ -64,7 +64,7 @@ namespace EventBus.AzureServiceBus
         public override async Task Subscribe<T, TH>(CancellationToken cancellationToken = default)
         {
             var eventName = typeof(T).Name;
-            eventName = ProcessEventName(eventName);
+            //eventName = ProcessEventName(eventName);
             if (!SubsManager.HasSubscriptionForEvent(eventName))
             {
                 await CreateServiceBusAdministrationClient(eventName, cancellationToken);
@@ -101,9 +101,6 @@ namespace EventBus.AzureServiceBus
                 return Task.CompletedTask;
             };
             await processor.StartProcessingAsync(cancellationToken);
-
-            //await processor.StopProcessingAsync(cancellationToken);
-            //await processor.DisposeAsync();
         }
         private async Task CreateServiceBusAdministrationClient(string eventName, CancellationToken cancellationToken = default)
         {

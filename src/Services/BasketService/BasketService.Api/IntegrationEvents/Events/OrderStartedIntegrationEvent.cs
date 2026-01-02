@@ -2,5 +2,5 @@
 
 namespace BasketService.Api.IntegrationEvents.Events;
 
-public record OrderCreatedIntegrationEvent(string UserId) : IntegrationEvent;
+public record OrderStartedIntegrationEvent(string UserId) : IntegrationEvent;
 

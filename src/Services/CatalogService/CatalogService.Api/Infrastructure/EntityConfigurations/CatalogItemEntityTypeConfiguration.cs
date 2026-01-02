@@ -25,8 +25,6 @@ namespace CatalogService.Api.Infrastructure.EntityConfigurations
             builder.Property(x => x.PictureFileName)
               .IsRequired(false);
 
-            builder.Ignore(x => x.PictureUri);
-
             builder.HasOne(x => x.CatalogBrand)
                 .WithMany()
                 .HasForeignKey(x => x.CatalogBrandId);

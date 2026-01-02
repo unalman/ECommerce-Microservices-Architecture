@@ -1,6 +1,7 @@
 ﻿using CatalogService.Api.Core.Application;
 using CatalogService.Api.Core.Domain;
 using CatalogService.Api.Infrastructure.Context;
+using CatalogService.Api.IntegrationEvents.Events;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -166,9 +167,15 @@ namespace CatalogService.Api.Apis
             var priceEntry = catalogEntry.Property(x => x.Price);
             if (priceEntry.IsModified)  // Save product's data and publish integration event through the Event Bus if price has changed
             {
+                var priceChangedEvent = new ProductPriceChangedIntegrationEvent(catalogItem.Id, productToUpdate.Price, priceEntry.OriginalValue);
 
+                // Achieving atomicity between original Catalog database operation and the IntegrationEventLog thanks to a local transaction
+                await services.EventService.SaveEventAndCatalogContextChangesAsync(priceChangedEvent);
+
+                // Publish through the Event Bus and mark the saved event as published
+                await services.EventService.PublishThroughEventBusAsync(priceChangedEvent);
             }
-            else
+            else// Just save the updated product because the Product's Price hasn't changed.
             {
                 await services.Context.SaveChangesAsync();
             }

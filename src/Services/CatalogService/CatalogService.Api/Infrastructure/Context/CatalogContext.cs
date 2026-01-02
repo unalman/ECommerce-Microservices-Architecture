@@ -1,5 +1,6 @@
 ﻿using CatalogService.Api.Core.Domain;
 using CatalogService.Api.Infrastructure.EntityConfigurations;
+using IntegrationEventLogEF;
 using Microsoft.EntityFrameworkCore;
 
 namespace CatalogService.Api.Infrastructure.Context
@@ -21,6 +22,8 @@ namespace CatalogService.Api.Infrastructure.Context
             builder.ApplyConfiguration(new CatalogBrandEntityTypeConfiguration());
             builder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
             builder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
+
+            builder.UseIntegraitonEventLogs();
         }
     }
 }

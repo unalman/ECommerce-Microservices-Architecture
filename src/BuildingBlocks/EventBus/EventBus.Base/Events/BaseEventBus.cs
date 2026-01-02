@@ -29,7 +29,7 @@ namespace EventBus.Base.Events
         }
         public virtual string GetSubName(string eventName)
         {
-            return $"{EventBusConfig.SubscriberClientAppName}.{ProcessEventName(eventName)}";
+            return $"{EventBusConfig.SubscriberClientAppName}.{eventName}";
         }
         public virtual void Dispose()
         {
@@ -39,7 +39,7 @@ namespace EventBus.Base.Events
 
         public async Task<bool> ProcessEvent(string eventName, string message)
         {
-            eventName = ProcessEventName(eventName);
+            //eventName = ProcessEventName(eventName);
 
             var processed = false;
             if (SubsManager.HasSubscriptionForEvent(eventName))
