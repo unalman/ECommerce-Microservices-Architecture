@@ -1,6 +1,13 @@
-@CatalogService.Api_HostAddress = http://localhost:5175
+@CatalogService.Api_HostAddress = http://localhost:5201
+@ApiVersion = 1.0
 
-GET {{CatalogService.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{CatalogService.Api_HostAddress}}/openapi/v1.json
+
+
+###
+{{CatalogService.Api_HostAddress}}/api/catalog/items?PageSize=10&PageIndex=0&name=&type=1&brand=1&api-version={{ApiVersion}}
+
+###
+{{CatalogService.Api_HostAddress}}/items/1
 
 ###

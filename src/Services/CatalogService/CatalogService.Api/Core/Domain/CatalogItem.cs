@@ -1,8 +1,5 @@
 ﻿using CatalogService.Api.Exceptions;
 using System.ComponentModel.DataAnnotations;
-using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json.Serialization;
 
 namespace CatalogService.Api.Core.Domain
 {

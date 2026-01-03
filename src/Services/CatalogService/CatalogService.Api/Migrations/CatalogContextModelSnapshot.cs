@@ -22,19 +22,13 @@ namespace CatalogService.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.HasSequence("catalog_brand_hilo", "catalog")
-                .IncrementsBy(10);
-
-            modelBuilder.HasSequence("catalog_hilo", "catalog")
-                .IncrementsBy(10);
-
             modelBuilder.Entity("CatalogService.Api.Core.Domain.CatalogBrand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "catalog_brand_hilo", "catalog");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Brand")
                         .IsRequired()
@@ -43,7 +37,7 @@ namespace CatalogService.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CatalogBrand", "catalog");
+                    b.ToTable("CatalogBrand", (string)null);
                 });
 
             modelBuilder.Entity("CatalogService.Api.Core.Domain.CatalogItem", b =>
@@ -52,7 +46,7 @@ namespace CatalogService.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "catalog_hilo", "catalog");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvailableStock")
                         .HasColumnType("integer");
@@ -92,7 +86,9 @@ namespace CatalogService.Api.Migrations
 
                     b.HasIndex("CatalogTypeId");
 
-                    b.ToTable("Catalog", "catalog");
+                    b.HasIndex("Name");
+
+                    b.ToTable("Catalog", (string)null);
                 });
 
             modelBuilder.Entity("CatalogService.Api.Core.Domain.CatalogType", b =>
@@ -101,15 +97,16 @@ namespace CatalogService.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "catalog_hilo", "catalog");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CatalogType", "catalog");
+                    b.ToTable("CatalogType", (string)null);
                 });
 
             modelBuilder.Entity("IntegrationEventLogEF.IntegrationEventLogEntry", b =>

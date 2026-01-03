@@ -3,8 +3,8 @@ services:
   ecommercedb:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: unalman
+      POSTGRES_PASSWORD: unalman
       POSTGRES_DB: catalogdb
     ports:
       - "5432:5432"
@@ -48,7 +48,7 @@ services:
     ports:
       - "6379:6379"    # Host-machine 6379 portunu container içi 6379 portuna eşliyor
     volumes:
-      - redis_data:/data        # Kalıcılık için volume
+      - redis_data:/data 
 
 configs:
   rabbitmq-plugins:

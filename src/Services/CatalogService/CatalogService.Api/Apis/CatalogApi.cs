@@ -128,7 +128,7 @@ namespace CatalogService.Api.Apis
 
             var path = GetFullPath(environment.ContentRootPath, item.PictureFileName);
 
-            string imageFileExtension = Path.GetExtension(path);
+            string imageFileExtension = Path.GetExtension(item.PictureFileName) ?? string.Empty;
             string mimetype = GetImageMimeTypeFromImageFileExtension(imageFileExtension);
             DateTime lastModified = File.GetLastWriteTimeUtc(path);
 

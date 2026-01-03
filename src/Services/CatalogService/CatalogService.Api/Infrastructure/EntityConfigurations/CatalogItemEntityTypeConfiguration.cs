@@ -9,29 +9,18 @@ namespace CatalogService.Api.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<CatalogItem> builder)
         {
-            builder.ToTable("Catalog", CatalogContext.DEFAULT_SCHEMA);
+            builder.ToTable("Catalog");
 
-            builder.Property(x => x.Id)
-                .UseHiLo("catalog_hilo", CatalogContext.DEFAULT_SCHEMA)
-                .IsRequired();
-
-            builder.Property(x => x.Name)
-                .IsRequired()
+            builder.Property(ci => ci.Name)
                 .HasMaxLength(50);
 
-            builder.Property(x => x.Price)
-               .IsRequired();
+            builder.HasOne(ci => ci.CatalogBrand)
+                .WithMany();
 
-            builder.Property(x => x.PictureFileName)
-              .IsRequired(false);
+            builder.HasOne(ci => ci.CatalogType)
+                .WithMany();
 
-            builder.HasOne(x => x.CatalogBrand)
-                .WithMany()
-                .HasForeignKey(x => x.CatalogBrandId);
-
-            builder.HasOne(x => x.CatalogType)
-                .WithMany()
-                .HasForeignKey(x => x.CatalogTypeId);
+            builder.HasIndex(ci => ci.Name);
         }
     }
 }
