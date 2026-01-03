@@ -8,8 +8,6 @@ namespace CatalogService.Api.Infrastructure.Context
 {
     public class CatalogContext : DbContext
     {
-        public const string DEFAULT_SCHEMA = "catalog";
-
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
         {
         }
@@ -20,8 +18,6 @@ namespace CatalogService.Api.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.HasDefaultSchema("catalog");
-
             builder.ApplyConfiguration(new CatalogBrandEntityTypeConfiguration());
             builder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
             builder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
