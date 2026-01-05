@@ -24,35 +24,30 @@ namespace ServiceDefaults
             var identitySection = configuration.GetSection("Identity");
             if (!identitySection.Exists())
             {
+                // No identity section, so no authentication
                 return services;
             }
-
-            var key = Encoding.UTF8.GetBytes(identitySection["Key"]!);
 
             // prevent from mapping "sub" claim to nameidentifier.
             JsonWebTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 
             services.AddAuthentication().AddJwtBearer(options =>
             {
-                //var identityUrl = identitySection.GetRequiredValue("Url");
-                //var audience = identitySection.GetRequiredValue("Audience");
+                var identityUrl = identitySection.GetRequiredValue("Url");
+                var audience = identitySection.GetRequiredValue("Audience");
 
-                //options.Authority = identityUrl;
-                //options.RequireHttpsMetadata = false;
-                //options.Audience = audience;
-                //options.TokenValidationParameters.ValidateAudience = false;
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = audience;
 
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+#if DEBUG
+                //Needed if using Android Emulator Locally. See https://learn.microsoft.com/en-us/dotnet/maui/data-cloud/local-web-services?view=net-maui-8.0#android
+                options.TokenValidationParameters.ValidIssuers = [identityUrl, "https://10.0.2.2:5243"];
+#else
+            options.TokenValidationParameters.ValidIssuers = [identityUrl];
+#endif
 
-                    ValidIssuer = identitySection["Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ClockSkew = TimeSpan.Zero
-                };
+                options.TokenValidationParameters.ValidateAudience = false;
             });
             services.AddAuthorization();
 

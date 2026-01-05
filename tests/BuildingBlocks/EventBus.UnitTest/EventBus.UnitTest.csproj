@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\BuildingBlocks\EventBus\EventBus.Factory\EventBus.Factory.csproj" />
+    <ProjectReference Include="..\..\..\src\BuildingBlocks\EventBus\EventBus.Base\EventBus.Base.csproj" />
   </ItemGroup>
 
   <ItemGroup>

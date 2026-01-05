@@ -2,7 +2,6 @@
 using CatalogService.Api.Infrastructure.EntityConfigurations;
 using IntegrationEventLogEF;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace CatalogService.Api.Infrastructure.Context
 {
@@ -18,6 +17,7 @@ namespace CatalogService.Api.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.HasPostgresExtension("vector");
             builder.ApplyConfiguration(new CatalogBrandEntityTypeConfiguration());
             builder.ApplyConfiguration(new CatalogTypeEntityTypeConfiguration());
             builder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());

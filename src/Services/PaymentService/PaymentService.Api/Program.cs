@@ -1,54 +1,21 @@
-using EventBus.Base;
-using EventBus.Base.Abstraction;
-using EventBus.Factory;
+using EventBus.Base.Extensions;
+using PaymentService.Api;
 using PaymentService.Api.IntegrationEvents.EventHandlers;
 using PaymentService.Api.IntegrationEvents.Events;
-using RabbitMQ.Client;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.AddServiceDefaults();
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.AddRabbitMqzEventBus("EventBus")
+    .AddSubscription<OrderStatusChangedToStockConfirmedIntegrationEvent, OrderStatusChangedToStockConfirmedIntegrationEventHandler>();
 
-builder.Services.AddLogging(configure => configure.AddConsole());
-builder.Services.AddTransient<OrderStartedIntegrationEventHandler>();
-builder.Services.AddSingleton<IEventBus>(sp =>
-{
-    EventBusConfig config = new()
-    {
-        ConnectionRetryCount = 5,
-        EventNameSuffix = "IntegrationEvent",
-        SubscriberClientAppName = "PaymentService",
-        EventBusType = EventBusType.RabbitMQ,
-        Connection = new ConnectionFactory()
-        {
-            HostName = "localhost",
-            Port = 5672,
-            UserName = "unal",
-            Password = "unal"
-        }
-    };
-    return EventBusFactory.Create(config, sp);
-});
+builder.Services.AddOptions<PaymentOptions>()
+    .BindConfiguration(nameof(PaymentOptions));
 
 var app = builder.Build();
 
-IEventBus eventBus = app.Services.GetRequiredService<IEventBus>();
-await eventBus.Subscribe<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.MapDefaultEndpoints();
 
 app.Run();

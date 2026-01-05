@@ -1,5 +1,4 @@
 ﻿
-
 namespace EventBus.Base.Extensions
 {
     public static class GenericTypeExtensions

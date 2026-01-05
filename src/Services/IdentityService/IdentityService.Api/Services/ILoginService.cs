@@ -7,12 +7,10 @@ namespace IdentityService.Api.Services
     {
         Task<bool> ValidateCredentials(T user, string password);
 
-        Task<SignInResult> CheckPasswordSignIn(T user, string password, bool lockoutOnFailure = false);
-
-        Task<T?> FindByUsername(string user);
+        Task<T> FindByUsername(string user);
 
         Task SignIn(T user);
 
-        Task SingInAsync(T user, AuthenticationProperties properties, string authenticationMethod = null);
+        Task SignInAsync(T user, AuthenticationProperties properties, string authenticationMethod = null);
     }
 }

@@ -1,5 +1,9 @@
 ﻿using CatalogService.Api.Infrastructure.Context;
 using CatalogService.Api.IntegrationEvents;
+using CatalogService.Api.IntegrationEvents.EventHandling;
+using CatalogService.Api.IntegrationEvents.Events;
+using CatalogService.Api.Services;
+using EventBus.Base.Extensions;
 using IntegrationEventLogEF.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,13 +21,36 @@ namespace CatalogService.Api.Extensions
                 return;
             }
 
-            builder.Services.AddDbContext<CatalogContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQLConnection")));
+            builder.AddNpgsqlDbContext<CatalogContext>("catalogdb", configureDbContextOptions: dbContextOptionsBuilder =>
+            {
+                dbContextOptionsBuilder.UseNpgsql();
+            });
 
-            if (builder.Environment.IsDevelopment())
-                builder.Services.AddMigration<CatalogContext, CatalogContextSeed>();
+            // REVIEW: This is done for development ease but shouldn't be here in production
+            builder.Services.AddMigration<CatalogContext, CatalogContextSeed>();
 
+            // Add the integration services that consume the DbContext
             builder.Services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<CatalogContext>>();
             builder.Services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
+
+            builder.AddRabbitMqzEventBus("eventbus")
+                .AddSubscription<OrderStatusChangedToAwaitingValidationIntegrationEvent, OrderStatusChangedToAwaitingValidationIntegrationEventHandler>()
+                .AddSubscription<OrderStatusChangedToPaidIntegrationEvent, OrderStatusChangedToPaidIntegrationEventHandler>();
+
+            builder.Services.AddOptions<CatalogOptions>()
+                .BindConfiguration(nameof(CatalogOptions));
+
+            if (builder.Configuration["OllamaEnabled"] is string ollamaEnabled && bool.Parse(ollamaEnabled))
+            {
+                builder.AddOllamaApiClient("embedding")
+                    .AddEmbeddingGenerator();
+            }
+            else if (!string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString("textEmbeddingModel")))
+            {
+                builder.AddOpenAIClientFromConfiguration("textEmbeddingModel")
+                    .AddEmbeddingGenerator();
+            }
+            builder.Services.AddScoped<ICatalogAI, CatalogAI>();
         }
     }
 }

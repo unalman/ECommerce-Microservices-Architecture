@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.OpenApi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
+using Microsoft.OpenApi;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -31,6 +32,7 @@ internal static class OpenApiOptionsExtensions
         });
         return options;
     }
+
     private static string BuildDescription(ApiVersionDescription api, string description)
     {
         var text = new StringBuilder(description);
@@ -97,35 +99,50 @@ internal static class OpenApiOptionsExtensions
 
         return text.ToString();
     }
+
+    public static OpenApiOptions ApplySecuritySchemeDefinitions(this OpenApiOptions options)
+    {
+        options.AddDocumentTransformer<SecuritySchemeDefinitionsTransformer>();
+        return options;
+    }
+
     public static OpenApiOptions ApplyAuthorizationChecks(this OpenApiOptions options, string[] scopes)
     {
-        options.AddOperationTransformer((operation, context, cancelationToken) =>
+        options.AddOperationTransformer((operation, context, cancellationToken) =>
         {
             var metadata = context.Description.ActionDescriptor.EndpointMetadata;
-            if (!metadata.OfType<IAuthorizeData>().Any()) return Task.CompletedTask;
+
+            if (!metadata.OfType<IAuthorizeData>().Any())
+            {
+                return Task.CompletedTask;
+            }
 
             operation.Responses ??= new OpenApiResponses();
-            operation.Responses.TryAdd("401", new OpenApiResponse() { Description = "Unauthorized" });
-            operation.Responses.TryAdd("403", new OpenApiResponse() { Description = "Forbidden" });
+            operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });
 
-            //var oAuthScheme = new OpenApiSecuritySchemeReference("oauth2", null);
-            //operation.Security = new List<OpenApiSecurityRequirement>
-            //{
-            //    new()
-            //    {
-            //        [oAuthScheme] = scopes.ToList()
-            //    }
-            //};
+            var oAuthScheme = new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "oauth2" // document.Components.SecuritySchemes key’i
+                }
+            };
+
+            operation.Security = new List<OpenApiSecurityRequirement>
+            {
+                new()
+                {
+                    [oAuthScheme] = scopes.ToList()
+                }
+            };
 
             return Task.CompletedTask;
         });
         return options;
     }
-    public static OpenApiOptions ApplySecuritySchemeDefinition(this OpenApiOptions options)
-    {
-        options.AddDocumentTransformer<SecuritySchemeDefinitionsTransformer>();
-        return options;
-    }
+
     public static OpenApiOptions ApplyOperationDeprecatedStatus(this OpenApiOptions options)
     {
         options.AddOperationTransformer((operation, context, cancellationToken) =>
@@ -136,11 +153,13 @@ internal static class OpenApiOptionsExtensions
         });
         return options;
     }
+
     public static OpenApiOptions ApplyApiVersionDescription(this OpenApiOptions options)
     {
         options.AddOperationTransformer((operation, context, cancellationToken) =>
         {
-            var apiVersionParameter = operation.Parameters?.FirstOrDefault(x => x.Name == "api-version");
+            // Find parameter named "api-version" and add a description to it
+            var apiVersionParameter = operation.Parameters?.FirstOrDefault(p => p.Name == "api-version");
             if (apiVersionParameter is not null)
             {
                 apiVersionParameter.Description = "The API version, in the format 'major.minor'.";
@@ -161,25 +180,30 @@ internal static class OpenApiOptionsExtensions
         });
         return options;
     }
+
     private class SecuritySchemeDefinitionsTransformer(IConfiguration configuration) : IOpenApiDocumentTransformer
     {
         public Task TransformAsync(OpenApiDocument document, OpenApiDocumentTransformerContext context, CancellationToken cancellationToken)
         {
             var identitySection = configuration.GetSection("Identity");
-            if (!identitySection.Exists()) return Task.CompletedTask;
+            if (!identitySection.Exists())
+            {
+                return Task.CompletedTask;
+            }
 
             var identityUrlExternal = identitySection.GetRequiredValue("Url");
-            var scopes = identitySection.GetRequiredSection("Scopes").GetChildren().ToDictionary(x => x.Key, x => x.Value ?? string.Empty);
-            var securityScheme = new OpenApiSecurityScheme()
+            var scopes = identitySection.GetRequiredSection("Scopes").GetChildren().ToDictionary(p => p.Key, p => p.Value ?? string.Empty);
+            var securityScheme = new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.OAuth2,
                 Flows = new OpenApiOAuthFlows()
                 {
+                    // TODO: Change this to use Authorization Code flow with PKCE
                     Implicit = new OpenApiOAuthFlow()
                     {
                         AuthorizationUrl = new Uri($"{identityUrlExternal}/connect/authorize"),
                         TokenUrl = new Uri($"{identityUrlExternal}/connect/token"),
-                        Scopes = scopes
+                        Scopes = scopes,
                     }
                 }
             };

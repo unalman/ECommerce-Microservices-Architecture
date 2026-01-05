@@ -1,5 +1,9 @@
 ﻿using BasketService.Api.Core.Application.Repository;
+using BasketService.Api.IntegrationEvents.EventHandlers;
+using BasketService.Api.IntegrationEvents.Events;
+using EventBus.Base.Extensions;
 using ServiceDefaults;
+using System.Text.Json.Serialization;
 
 namespace BasketService.Api.Extensions
 {
@@ -7,33 +11,20 @@ namespace BasketService.Api.Extensions
     {
         public static void AddApplicationsServices(this IHostApplicationBuilder builder)
         {
-
-            //var jwtSetting = builder.Configuration.GetSection("Identity");
-            //var key = Encoding.UTF8.GetBytes(jwtSetting["Key"]!);
-
-            //builder.Services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //.AddJwtBearer(options =>
-            //{
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = false,
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-
-            //        ValidIssuer = jwtSetting["Issuer"],
-            //        IssuerSigningKey = new SymmetricSecurityKey(key),
-            //        ClockSkew = TimeSpan.Zero
-            //    };
-            //});
-
             builder.AddDefaultAuthentication();
 
+            builder.AddRedisClient("redis");
+
             builder.Services.AddSingleton<IBasketRepository, RedisBasketRepository>();
+
+            builder.AddRabbitMqzEventBus("eventbus")
+                .AddSubscription<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>()
+                .ConfigureJsonOptions(options => options.TypeInfoResolverChain.Add(IntegrationEventContext.Default));
         }
+    }
+
+    [JsonSerializable(typeof(OrderStartedIntegrationEvent))]
+    partial class IntegrationEventContext : JsonSerializerContext
+    {
     }
 }

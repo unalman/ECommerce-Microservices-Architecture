@@ -1,53 +1,26 @@
-using EventBus.Base;
-using EventBus.Base.Abstraction;
-using EventBus.Factory;
+using OrderService.Api.Apis;
 using OrderService.Api.Extensions;
-using RabbitMQ.Client;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.AddServiceDefaults();
 builder.AddApplicationServices();
+builder.Services.AddProblemDetails();
 
-builder.Services.AddSingleton<IEventBus>(sp =>
-{
-    EventBusConfig config = new()
-    {
-        ConnectionRetryCount = 5,
-        EventNameSuffix = "IntegrationEvent",
-        SubscriberClientAppName = "BasketService",
-        EventBusType = EventBusType.RabbitMQ,
-        Connection = new ConnectionFactory()
-        {
-            HostName = "localhost",
-            Port = 5672,
-            UserName = "unal",
-            Password = "unal"
-        }
-    };
-    return EventBusFactory.Create(config, sp);
-});
+var withApiVersioning = builder.Services.AddApiVersioning();
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.AddDefaultOpenApi(withApiVersioning);
 
 var app = builder.Build();
 
-IEventBus eventBus = app.Services.GetRequiredService<IEventBus>();
-//await eventBus.Subscribe<OrderCreatedIntegrationEvent, OrderCreatedIntegrationEventHandler>();
+app.MapDefaultEndpoints();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+var orders = app.NewVersionedApi("Orders");
 
-app.UseHttpsRedirection();
+orders.MapOrdersApiV1()
+    .RequireAuthorization();
 
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseDefaultOpenApi();
 
 app.Run();

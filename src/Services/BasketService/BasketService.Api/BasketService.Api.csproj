@@ -7,10 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Aspire.StackExchange.Redis" Version="13.1.0" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.11" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.11" />
-		<PackageReference Include="StackExchange.Redis" Version="2.10.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -18,12 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Core\Application\Services\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus.Base\EventBus.Base.csproj" />
-		<ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus.Factory\EventBus.Factory.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj" />
 		<ProjectReference Include="..\..\ServiceDefaults\ServiceDefaults.csproj" />
 	</ItemGroup>
 

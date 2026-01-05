@@ -86,16 +86,35 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
             PaymentId = paymentId;
         }
 
-        public void SetCancelledStatus()
+        public void SetAwaitingValidationStatus()
         {
-            if (OrderStatus == OrderStatus.Paid || OrderStatus == OrderStatus.Shipped)
+            if (OrderStatus == OrderStatus.Submitted)
             {
-                StatusChangeException(OrderStatus.Cancelled);
+                AddDomainEvent(new OrderStatusChangedToAwaitingValidationDomainEvent(Id, _orderItems));
+                OrderStatus = OrderStatus.AwaitingValidation;
             }
+        }
 
-            OrderStatus = OrderStatus.Cancelled;
-            Description = "The order was cancelled";
-            AddDomainEvent(new OrderCancelledDomainEvent(this));
+        public void SetStockConfirmedStatus()
+        {
+            if (OrderStatus == OrderStatus.AwaitingValidation)
+            {
+                AddDomainEvent(new OrderStatusChangedToStockConfirmedDomainEvent(Id));
+
+                OrderStatus = OrderStatus.StockConfirmed;
+                Description = "All the items were confirmed with available stock.";
+            }
+        }
+
+        public void SetPaidStatus()
+        {
+            if (OrderStatus == OrderStatus.StockConfirmed)
+            {
+                AddDomainEvent(new OrderStatusChangedToPaidDomainEvent(Id, OrderItems));
+
+                OrderStatus = OrderStatus.Paid;
+                Description = "The payment was performed at a simulated \"American Bank checking bank account ending on XX35071\"";
+            }
         }
 
         public void SetShippedStatus()
@@ -108,6 +127,33 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
             OrderStatus = OrderStatus.Shipped;
             Description = "The order was shipped";
             AddDomainEvent(new OrderShippedDomainEvent(this));
+        }
+
+        public void SetCancelledStatus()
+        {
+            if (OrderStatus == OrderStatus.Paid || OrderStatus == OrderStatus.Shipped)
+            {
+                StatusChangeException(OrderStatus.Cancelled);
+            }
+
+            OrderStatus = OrderStatus.Cancelled;
+            Description = "The order was cancelled";
+            AddDomainEvent(new OrderCancelledDomainEvent(this));
+        }
+
+        public void SetCancelledStatusWhenStockIsRejected(IEnumerable<int> orderStockRejectedItems)
+        {
+            if (OrderStatus == OrderStatus.AwaitingValidation)
+            {
+                OrderStatus = OrderStatus.Cancelled;
+
+                var itemsStockRejectedProductNames = OrderItems
+                    .Where(x => orderStockRejectedItems.Contains(x.ProductId))
+                    .Select(x => x.ProductName);
+
+                var itemsStockRejectedDescription = string.Join(", ", itemsStockRejectedProductNames);
+                Description = $"The product items don't have stock: ({itemsStockRejectedDescription}).";
+            }
         }
 
         public decimal GetTotal() => _orderItems.Sum(o => o.Units * o.UnitPrice);

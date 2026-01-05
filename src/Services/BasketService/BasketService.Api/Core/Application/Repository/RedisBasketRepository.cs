@@ -15,7 +15,7 @@ namespace BasketService.Api.Core.Application.Repository
 
         public async Task<bool> DeleteBasketAsync(string id)
         {
-            return await _database.KeyDeleteAsync(id);
+            return await _database.KeyDeleteAsync(GetBasketKey(id));
         }
 
         public async Task<CustomerBasket> GetBasketAsync(string customerId)

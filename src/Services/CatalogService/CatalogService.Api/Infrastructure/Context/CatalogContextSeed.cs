@@ -1,22 +1,33 @@
 ﻿using CatalogService.Api.Core.Domain;
+using CatalogService.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Npgsql;
+using Pgvector;
 using System.Text.Json;
 
 namespace CatalogService.Api.Infrastructure.Context
 {
     public partial class CatalogContextSeed(
-        IWebHostEnvironment env) : IDbSeeder<CatalogContext>
+        IWebHostEnvironment env,
+        IOptions<CatalogOptions> settings,
+        ICatalogAI catalogAI,
+        ILogger<CatalogContextSeed> logger) : IDbSeeder<CatalogContext>
     {
         public async Task SeedAsync(CatalogContext context)
         {
+            var useCustomizationData = settings.Value.UseCustomizationData;
             var contentRootPath = env.ContentRootPath;
+            var picturePath = env.WebRootPath;
 
-            await context.Database.OpenConnectionAsync();
-            await ((NpgsqlConnection)context.Database.GetDbConnection()).ReloadTypesAsync();
+            // Workaround from https://github.com/npgsql/efcore.pg/issues/292#issuecomment-388608426
+            context.Database.OpenConnection();
+            ((NpgsqlConnection)context.Database.GetDbConnection()).ReloadTypes();
+
             if (!context.CatalogItems.Any())
             {
-                var sourcePath = Path.Combine(contentRootPath, "Infrastructure", "Setup", "catalog.json");
+                var sourcePath = Path.Combine(contentRootPath, "Setup", "catalog.json");
                 var sourceJson = File.ReadAllText(sourcePath);
                 var sourceItems = JsonSerializer.Deserialize<CatalogSourceEntry[]>(sourceJson) ?? Array.Empty<CatalogSourceEntry>();
 
@@ -24,11 +35,13 @@ namespace CatalogService.Api.Infrastructure.Context
                 await context.CatalogBrands.AddRangeAsync(sourceItems.Select(x => x.Brand).Distinct()
                     .Where(brandName => brandName != null)
                     .Select(brandName => new CatalogBrand(brandName!)));
+                logger.LogInformation("Seeded catalog with {NumBrands} brands", context.CatalogBrands.Count());
 
                 context.CatalogTypes.RemoveRange(context.CatalogTypes);
                 await context.CatalogTypes.AddRangeAsync(sourceItems.Select(x => x.Type).Distinct()
                     .Where(typeName => typeName != null)
                     .Select(typeName => new CatalogType(typeName!)));
+                logger.LogInformation("Seeded catalog with {NumTypes} types", context.CatalogTypes.Count());
 
                 await context.SaveChangesAsync();
 
@@ -37,18 +50,32 @@ namespace CatalogService.Api.Infrastructure.Context
 
                 var catalogItems = sourceItems
                     .Where(source => source.Name != null && source.Brand != null && source.Type != null)
-                    .Select(source => new CatalogItem(source.Name)
+                    .Select(source => new CatalogItem(source.Name!)
                     {
                         Id = source.Id,
                         Description = source.Description,
                         Price = source.Price,
-                        PictureFileName = $"{source.Id}.webp",
                         CatalogBrandId = brandIdsByName[source.Brand!],
-                        CatalogTypeId = typeIdsByName[source.Type!]
+                        CatalogTypeId = typeIdsByName[source.Type!],
+                        AvailableStock = 100,
+                        MaxStockThreshold = 200,
+                        RestockThreshold = 10,
+                        PictureFileName = $"{source.Id}.webp",
                     }).ToArray();
-                await context.CatalogItems.AddRangeAsync(catalogItems);
-                await context.SaveChangesAsync();
 
+                if (catalogAI.IsEnabled)
+                {
+                    logger.LogInformation("Generating {NumItems} embeddings", catalogItems.Length);
+                    IReadOnlyList<Vector>? embeddings = await catalogAI.GetEmbeddingsAsync(catalogItems);
+                    for (int i = 0; i < catalogItems.Length; i++)
+                    {
+                        catalogItems[i].Embedding = embeddings?[i];
+                    }
+                }
+
+                await context.CatalogItems.AddRangeAsync(catalogItems);
+                logger.LogInformation("Seeded catalog with {NumItems} items", context.CatalogItems.Count());
+                await context.SaveChangesAsync();
             }
         }
         private class CatalogSourceEntry

@@ -1,6 +1,6 @@
-using IdentityService.Api.Apis;
+using Duende.IdentityServer.Services;
+using IdentityService.Api.Configuration;
 using IdentityService.Api.Data;
-using IdentityService.Api.Extensions;
 using IdentityService.Api.Models;
 using IdentityService.Api.Services;
 using Microsoft.AspNetCore.Identity;
@@ -8,60 +8,54 @@ using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.AddServiceDefaults();
 
-builder.AddApplicationService();
+builder.Services.AddControllersWithViews();
+
+builder.AddNpgsqlDbContext<ApplicationDbContext>("identitydb");
+
+builder.Services.AddMigration<ApplicationDbContext, UsersSeed>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-//var jwtSetting = builder.Configuration.GetSection("Jwt");
-//var key = Encoding.UTF8.GetBytes(jwtSetting["Key"]);
+builder.Services.AddIdentityServer(options =>
+{
+    options.Authentication.CookieLifetime = TimeSpan.FromHours(2);
 
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//})
-//.AddJwtBearer(options =>
-//{
-//    options.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateIssuer = true,
-//        ValidateAudience = true,
-//        ValidateLifetime = true,
-//        ValidateIssuerSigningKey = true,
+    options.Events.RaiseErrorEvents = true;
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseSuccessEvents = true;
 
-//        ValidIssuer = jwtSetting["Issuer"],
-//        ValidAudience = jwtSetting["Audience"],
-//        IssuerSigningKey = new SymmetricSecurityKey(key),
-//        ClockSkew = TimeSpan.Zero
-//    };
-//});
-//builder.Services.AddAuthorization();
+    // TODO: Remove this line in production.
+    options.KeyManagement.Enabled = false;
+})
+    .AddInMemoryIdentityResources(Config.GetResources())
+    .AddInMemoryApiScopes(Config.GetApiScopes())
+    .AddInMemoryApiResources(Config.GetApis())
+    .AddInMemoryClients(Config.GetClients(builder.Configuration))
+    // TODO: Not recommended for production - you need to store your key material somewhere secure
+    .AddDeveloperSigningCredential();
 
+
+builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddTransient<ILoginService<ApplicationUser>, EFLoginService>();
-
-builder.Services.AddControllers();
-
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-var withApiVersioning = builder.Services.AddApiVersioning();
-builder.AddDefaultOpenApi(withApiVersioning);
+builder.Services.AddTransient<IRedirectService, RedirectService>();
 
 var app = builder.Build();
 
-app.UseStatusCodePages();
+app.MapDefaultEndpoints();
 
-app.MapAuthenticationApi();
+app.UseStaticFiles();
 
-app.UseDefaultOpenApi();
-
-app.UseHttpsRedirection();
-
-//app.UseAuthentication();
+// This cookie policy fixes login issues with Chrome 80+ using HTTP
+app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
+app.UseRouting();
+app.UseIdentityServer();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapDefaultControllerRoute();
 
 app.Run();

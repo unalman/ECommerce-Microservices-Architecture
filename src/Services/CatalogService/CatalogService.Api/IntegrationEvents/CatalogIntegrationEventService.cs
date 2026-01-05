@@ -18,7 +18,7 @@ namespace CatalogService.Api.IntegrationEvents
             try
             {
                 await integrationEventLogService.MarkEventAsInProgressAsync(evt.Id);
-                await eventBus.Publish(evt);
+                await eventBus.PublishAsync(evt);
                 await integrationEventLogService.MarkEventAsPublishedAsync(evt.Id);
             }
             catch (Exception ex)

@@ -398,5 +398,413 @@
     "Name": "Astro GPS Navigator",
     "Description": "Never get lost on your outdoor adventures with the Astro GPS Navigator by AirStrider. This compact and rugged device comes loaded with topographic maps, GPS tracking, waypoint storage, and a long-lasting battery. It is equipped with a high-resolution color display for easy navigation in any lighting condition. Available in a sleek gray color.",
     "Price": 249.99
+  },
+  {
+    "Id": 51,
+    "Type": "Climbing",
+    "Brand": "Grolltex",
+    "Name": "SummitStone Chalk Bag",
+    "Description": "The SummitStone Chalk Bag in forest green is a must-have for climbers seeking adventure. Keep your hands dry and have easy access to chalk with this durable and compact bag. It features a drawstring closure, adjustable waist strap, and a Loop-Slider buckle for easy attachment to harnesses.",
+    "Price": 29.99
+  },
+  {
+    "Id": 52,
+    "Type": "Bags",
+    "Brand": "Legend",
+    "Name": "TrailHug 50L Backpack",
+    "Description": "The TrailHug 50L Backpack in navy blue is a perfect companion for all your hiking adventures. Made from lightweight and water-resistant nylon, this backpack features adjustable padded straps, multiple compartments for organized storage, and a breathable back panel for added comfort. It also comes with a handy built-in rain cover for unexpected showers.",
+    "Price": 129.99
+  },
+  {
+    "Id": 53,
+    "Type": "Ski/boarding",
+    "Brand": "Daybird",
+    "Name": "Raven Swift Snowboard",
+    "Description": "The Raven Swift Snowboard is ready to take you on thrilling rides down the slopes. With its striking white design and black logo, this all-mountain board is perfect for riders of all skill levels. It features a camber profile for stability and pop, and a medium flex for smooth turns and responsive control. Get ready to fly and carve like never before!",
+    "Price": 349.00
+  },
+  {
+    "Id": 54,
+    "Type": "Trekking",
+    "Brand": "Gravitator",
+    "Name": "Nebula Pro Headlamp",
+    "Description": "Illuminate your outdoor adventures with the Nebula Pro Headlamp. Its sleek design and water-resistant construction in neon color make it perfect for night hikes, camping trips, and emergencies. With 500 lumens of bright white light, adjustable brightness modes, and a rechargeable battery, this headlamp will light up the darkness and keep you safe.",
+    "Price": 59.99
+  },
+  {
+    "Id": 55,
+    "Type": "Jackets",
+    "Brand": "Solstix",
+    "Name": "Vigor 2.0 Insulated Jacket",
+    "Description": "Stay warm and stylish on the slopes with the Vigor 2.0 Insulated Jacket in vibrant red. This waterproof and breathable jacket is made with a 2-layer technical shell and features a detachable hood, adjustable cuffs, and multiple pockets for storage. With its modern design and ergonomic fit, it's the perfect outer layer for your winter adventures.",
+    "Price": 189.99
+  },
+  {
+    "Id": 56,
+    "Type": "Bags",
+    "Brand": "B&R",
+    "Name": "Traveler's Companion Duffel Bag",
+    "Description": "Whether you're embarking on a weekend getaway or a month-long expedition, the Traveler's Companion Duffel Bag has you covered. Made from durable waxed canvas in earthy brown, this versatile bag features multiple carry options, including shoulder straps and handles, and multiple compartments for organized packing. It even has a padded laptop sleeve, making it great for both adventure and work.",
+    "Price": 79.99
+  },
+  {
+    "Id": 57,
+    "Type": "Footwear",
+    "Brand": "Zephyr",
+    "Name": "Ascend XT Trail Running Shoes",
+    "Description": "Take on any trail with confidence in the Ascend XT Trail Running Shoes in charcoal gray. These lightweight yet rugged shoes offer excellent grip and support, thanks to their durable rubber outsole and advanced cushioning technology. The breathable mesh upper keeps your feet cool when the adventure heats up. It's time to push your limits and conquer the great outdoors.",
+    "Price": 109.99
+  },
+  {
+    "Id": 58,
+    "Type": "Cycling",
+    "Brand": "Raptor Elite",
+    "Name": "VelociX 2000 Bike Helmet",
+    "Description": "Protect your head in style with the VelociX 2000 Bike Helmet in glossy black. This aerodynamic helmet features an adjustable fit system, detachable visor, and 14 ventilation channels to keep you cool during intense rides. With its sleek design and lightweight construction, it's the perfect choice for road cycling, mountain biking, and everything in between.",
+    "Price": 79.99
+  },
+  {
+    "Id": 59,
+    "Type": "Navigation",
+    "Brand": "Quester",
+    "Name": "TrailSeeker GPS Watch",
+    "Description": "Stay on track and explore new trails with the TrailSeeker GPS Watch. With its durable design in stealth black, this watch is packed with features like GPS navigation, heart rate monitoring, and activity tracking. It also offers a long battery life, so you can keep going without worrying about recharging. The TrailSeeker is the ultimate companion for outdoor enthusiasts who love to explore.",
+    "Price": 149.99
+  },
+  {
+    "Id": 60,
+    "Type": "Ski/boarding",
+    "Brand": "WildRunner",
+    "Name": "SummitRider Snowboard Boots",
+    "Description": "Conquer the mountains in style with the SummitRider Snowboard Boots in matte black. These high-performance boots combine comfort, durability, and response to enhance your riding experience. Featuring a heat-moldable liner, dual-zone lacing system, and impact-resistant outsole, they provide a precise and snug fit, ensuring maximum control on any terrain. Get ready to take on the slopes like a pro!",
+    "Price": 249.00
+  },
+  {
+    "Id": 61,
+    "Type": "Footwear",
+    "Brand": "WildRunner",
+    "Name": "Trailblaze Steel-Blue Hiking Shoes",
+    "Description": "Explore the great outdoors with the Trailblaze Steel-Blue Hiking Shoes by WildRunner. These rugged and durable shoes feature a steel-blue color, a waterproof membrane, and a high-traction rubber outsole for superior grip on any terrain. The breathable upper keeps your feet cool and comfortable, while the reinforced toe cap adds extra protection. Perfect for hiking, camping, and other outdoor adventures.",
+    "Price": 129.99
+  },
+  {
+    "Id": 62,
+    "Type": "Ski/boarding",
+    "Brand": "Daybird",
+    "Name": "Shadow Black Snowboard",
+    "Description": "Conquer the slopes with the Daybird Shadow Black Snowboard. This sleek and stylish snowboard features a black colorway, a camber profile for maximum stability, and a medium-flex rating for responsive turns and tricks. Its lightweight construction ensures easy maneuverability, while the sintered base provides excellent speed and durability. Whether you're shredding on groomed runs or exploring the backcountry, this snowboard is designed to deliver peak performance.",
+    "Price": 379.00
+  },
+  {
+    "Id": 63,
+    "Type": "Climbing",
+    "Brand": "Raptor Elite",
+    "Name": "Razor Climbing Harness",
+    "Description": "Reach new heights with the Raptor Elite Razor Climbing Harness. This lightweight and breathable harness is designed for maximum comfort and performance. With its adjustable waist and leg loops, it offers a secure and customized fit. The razor-shaped webbing adds a stylish touch to the blue color of the harness. Featuring durable construction and reinforced tie-in points, this harness is a must-have for climbers of all levels.",
+    "Price": 94.99
+  },
+  {
+    "Id": 64,
+    "Type": "Bags",
+    "Brand": "Green Equipment",
+    "Name": "EcoVenture Olive Green Backpack",
+    "Description": "Embark on your next adventure with the Green Equipment EcoVenture Olive Green Backpack. Made from recycled materials, this sustainable backpack is as eco-friendly as it is functional. It features a spacious main compartment, multiple pockets for organizing your gear, and adjustable padded shoulder straps for comfortable carrying. The olive green color adds a touch of nature to your outdoor excursions.",
+    "Price": 69.99
+  },
+  {
+    "Id": 65,
+    "Type": "Cycling",
+    "Brand": "Solstix",
+    "Name": "Sprint PRO Carbon Cycling Helmet",
+    "Description": "Stay safe while cycling with the Solstix Sprint PRO Carbon Cycling Helmet. This high-performance helmet is crafted from carbon fiber for optimal impact protection and durability. It features an aerodynamic design, adjustable fit system, and ventilation channels to keep you cool on long rides. The rainbow color with the Solstix emblem adds a touch of style to your cycling adventures.",
+    "Price": 179.99
+  },
+  {
+    "Id": 66,
+    "Type": "Navigation",
+    "Brand": "B&R",
+    "Name": "Compass Pro A-320 Professional Compass",
+    "Description": "Navigate with precision using the B&R Compass Pro A-320 Professional Compass. Designed for outdoor enthusiasts and professionals alike, this compass features a liquid-filled housing for accurate readings, a rotating bezel for easy navigation, and a lanyard for convenient carrying. The gunmetal color with white markings ensures clarity and visibility even in low-light conditions. Get ready to explore the wilderness with confidence.",
+    "Price": 59.99
+  },
+  {
+    "Id": 67,
+    "Type": "Bags",
+    "Brand": "Quester",
+    "Name": "Venture 2.0 40L Waterproof Duffel Bag",
+    "Description": "Pack your gear in the Quester Venture 2.0 40L Waterproof Duffel Bag. This versatile duffel bag is made from waterproof nylon material and features taped seams to keep your belongings safe from the elements. It offers a spacious main compartment, external zippered pockets, and adjustable shoulder straps for easy carrying. The vibrant orange color adds a pop of excitement to your outdoor adventures.",
+    "Price": 79.99
+  },
+  {
+    "Id": 68,
+    "Type": "Jackets",
+    "Brand": "Grolltex",
+    "Name": "Mens Horizon 80s Softshell Jacket",
+    "Description": "Stay protected from the elements in the Grolltex Mens Horizon 80s Softshell Jacket. Made from a water-resistant and breathable fabric in retro 1980s style, this jacket keeps you dry and comfortable in any weather. It features multiple colors, a detachable hood, adjustable cuffs, and multiple pockets for storing your essentials. Whether you're hiking, skiing, or exploring the city, this jacket combines style and functionality.",
+    "Price": 169.99
+  },
+  {
+    "Id": 69,
+    "Type": "Navigation",
+    "Brand": "Gravitator",
+    "Name": "Expedition 200 GPS Navigator",
+    "Description": "Navigate with confidence using the Gravitator Expedition 200 GPS Navigator. This rugged and reliable navigator features a built-in GPS antenna for accurate positioning, preloaded maps, and a user-friendly interface with intuitive controls. The black color with the Gravitator logo complements the sleek design. With its long battery life and durable construction, this navigator is your ultimate outdoor companion.",
+    "Price": 299.00
+  },
+  {
+    "Id": 70,
+    "Type": "Trekking",
+    "Brand": "WildRunner",
+    "Name": "GripTrek Hiking Poles",
+    "Description": "The GripTrek hiking poles by WildRunner are a must-have for adventurers. With their durable aluminum construction and anti-slip handles, these poles provide stability and support on any terrain. Available in sleek yellow, these hiking poles are perfect for tackling steep inclines and rough trails.",
+    "Price": 79.99
+  },
+  {
+    "Id": 71,
+    "Type": "Footwear",
+    "Brand": "Daybird",
+    "Name": "Explorer Frost Boots",
+    "Description": "The Explorer Frost Boots by Daybird are the perfect companion for cold-weather adventures. These premium boots are designed with a waterproof and insulated shell, keeping your feet warm and protected in icy conditions. The sleek black design with blue accents adds a touch of style to your outdoor gear.",
+    "Price": 149.99
+  },
+  {
+    "Id": 72,
+    "Type": "Ski/boarding",
+    "Brand": "Gravitator",
+    "Name": "GravityZone All-Mountain Skis",
+    "Description": "Take your skiing to new heights with the GravityZone All-Mountain Skis by Gravitator. These high-performance skis are designed for precision and control on all types of terrain. The sleek metallic blue design will make you stand out on the slopes while the carbon fiber construction ensures lightweight durability.",
+    "Price": 699.00
+  },
+  {
+    "Id": 73,
+    "Type": "Ski/boarding",
+    "Brand": "WildRunner",
+    "Name": "Omni-Snow Dual Snowboard",
+    "Description": "Unleash your snowboarding skills with the Omni-Snow Dual Snowboard by WildRunner. This innovative design combines the maneuverability of a skateboard with the speed and stability of a snowboard. The vibrant red and black color scheme adds a dash of excitement to your snowboarding adventures.",
+    "Price": 289.99
+  },
+  {
+    "Id": 74,
+    "Type": "Climbing",
+    "Brand": "Raptor Elite",
+    "Name": "Apex Climbing Harness",
+    "Description": "Conquer the heights with the Apex Climbing Harness by Raptor Elite. This harness is constructed with high-strength nylon webbing and features adjustable leg loops for a secure and comfortable fit. The sleek white design with a vibrant orange emblem ensures you'll look good while tackling challenging routes.",
+    "Price": 99.99
+  },
+  {
+    "Id": 75,
+    "Type": "Footwear",
+    "Brand": "AirStrider",
+    "Name": "TrailTracker Hiking Shoes",
+    "Description": "The TrailTracker Hiking Shoes by AirStrider are built to handle any terrain. These lightweight and breathable shoes feature a rugged rubber sole for excellent traction and stability. The cool gray color with green accents adds a touch of style to your hiking ensemble.",
+    "Price": 89.99
+  },
+  {
+    "Id": 76,
+    "Type": "Cycling",
+    "Brand": "B&R",
+    "Name": "Fusion Carbon Cycling Helmet",
+    "Description": "Protect yourself on two wheels with the Fusion Carbon Cycling Helmet by B&R. This helmet is made from lightweight carbon fiber and features an aerodynamic design for maximum speed. The colorful finish with a bold blue stripe will make you stand out on the road.",
+    "Price": 159.00
+  },
+  {
+    "Id": 77,
+    "Type": "Trekking",
+    "Brand": "XE",
+    "Name": "Survivor 2-Person Tent",
+    "Description": "Gear up for your next adventure with the Survivor 2-Person Tent by XE. This rugged tent is made from durable ripstop nylon and features a waterproof coating to keep you dry in any weather. The vibrant orange color ensures high visibility in the wild.",
+    "Price": 249.99
+  },
+  {
+    "Id": 78,
+    "Type": "Bags",
+    "Brand": "Solstix",
+    "Name": "Basecamp Duffle Bag",
+    "Description": "The Basecamp Duffle Bag by Solstix is the ultimate adventure companion. This spacious bag is made from durable nylon and features multiple compartments for optimal organization. Its sleek red design with gray accents exudes both style and functionality.",
+    "Price": 129.00
+  },
+  {
+    "Id": 79,
+    "Type": "Jackets",
+    "Brand": "Legend",
+    "Name": "Everest Insulated Jacket",
+    "Description": "Conquer the cold with the Everest Insulated Jacket by Legend. This jacket combines warmth and style with its insulated design and sleek grey color. The water-resistant shell will keep you dry during unexpected showers while the cozy fleece lining adds extra comfort.",
+    "Price": 179.99
+  },
+  {
+    "Id": 80,
+    "Type": "Navigation",
+    "Brand": "XE",
+    "Name": "Pathfinder GPS Watch",
+    "Description": "Navigate with confidence using the Pathfinder GPS Watch by XE. This feature-packed watch includes GPS tracking, altimeter, barometer, and compass functions to guide you on your outdoor adventures. The sleek pink design with a vibrant green dial adds a sporty touch to your wrist.",
+    "Price": 199.00
+  },
+  {
+    "Id": 81,
+    "Type": "Footwear",
+    "Brand": "AirStrider",
+    "Name": "Trail Breeze Hiking Shoes",
+    "Description": "Experience the ultimate comfort and stability with the Trail Breeze hiking shoes by AirStrider. These lightweight shoes feature a breathable mesh upper in vivid blue, providing excellent airflow on hot summer hikes. The durable rubber outsole offers exceptional grip, ensuring you stay steady on any terrain.",
+    "Price": 109.99
+  },
+  {
+    "Id": 82,
+    "Type": "Ski/boarding",
+    "Brand": "WildRunner",
+    "Name": "Maverick Pro Ski Goggles",
+    "Description": "Conquer the slopes in style with the Maverick Pro ski goggles by WildRunner. Designed for maximum performance, these goggles feature a sleek black frame and mirrored, polarized lenses that reduce glare, enhancing your visibility. With a comfortable foam lining and adjustable strap, these goggles provide a secure and snug fit.",
+    "Price": 139.99
+  },
+  {
+    "Id": 83,
+    "Type": "Ski/boarding",
+    "Brand": "Zephyr",
+    "Name": "Blizzard Freestyle Snowboard",
+    "Description": "Unleash your freestyle skills on the slopes with the Blizzard snowboard from Zephyr. Featuring a vibrant orange and black design, this snowboard is perfect for riders who crave speed and control. Constructed with a durable bamboo core and carbon fiber reinforcement, the Blizzard offers an optimal blend of flexibility and responsiveness.",
+    "Price": 379.00
+  },
+  {
+    "Id": 84,
+    "Type": "Climbing",
+    "Brand": "Gravitator",
+    "Name": "Gravity Harness",
+    "Description": "Reach new heights with the Gravitator Gravity harness. With its innovative design and sturdy construction, this harness ensures your safety while climbing. The sleek black and red color scheme adds a touch of style. It offers maximum comfort and freedom of movement, giving you the confidence to conquer any climbing challenge.",
+    "Price": 89.99
+  },
+  {
+    "Id": 85,
+    "Type": "Trekking",
+    "Brand": "Daybird",
+    "Name": "LumenHead Headlamp",
+    "Description": "Illuminate your outdoor adventures with the Daybird LumenHead headlamp. This compact yet powerful headlamp features a bright LED light in a vibrant green housing. With multiple lighting modes, including a red light for preserving night vision, the LumenHead provides exceptional visibility in any conditions.",
+    "Price": 49.99
+  },
+  {
+    "Id": 86,
+    "Type": "Cycling",
+    "Brand": "Raptor Elite",
+    "Name": "ProVent Bike Helmet",
+    "Description": "Stay safe and stylish on your cycling adventures with the Raptor Elite ProVent bike helmet. This sleek helmet features a matte black finish with striking red accents. The ProVent technology ensures optimal airflow, keeping you cool and comfortable. With its adjustable fit system and removable visor, this helmet is perfect for both casual and professional riders.",
+    "Price": 79.99
+  },
+  {
+    "Id": 87,
+    "Type": "Trekking",
+    "Brand": "XE",
+    "Name": "Nomad 2-Person Tent",
+    "Description": "Embark on your next camping expedition with the XE Nomad 2-person tent. Designed for rugged outdoor conditions, this tent features a durable waterproof fabric in earthy tones. The spacious interior and easy-to-use setup make it ideal for comfortable camping. With its innovative ventilation system, you'll stay cool and dry throughout the night.",
+    "Price": 229.00
+  },
+  {
+    "Id": 88,
+    "Type": "Bags",
+    "Brand": "Green Equipment",
+    "Name": "Alpine AlpinePack Backpack",
+    "Description": "The AlpinePack backpack by Green Equipment is your ultimate companion for outdoor adventures. This versatile and durable backpack features a sleek navy design with reinforced straps. With a capacity of 45 liters, multiple compartments, and a hydration pack sleeve, it offers ample storage and organization. The ergonomic back panel ensures maximum comfort, even on the most challenging treks.",
+    "Price": 129.00
+  },
+  {
+    "Id": 89,
+    "Type": "Jackets",
+    "Brand": "Legend",
+    "Name": "Summit Pro Down Jacket",
+    "Description": "Defy the coldest temperatures with the Legend Summit Pro down jacket. This high-performance jacket is filled with premium down insulation for exceptional warmth. The sleek design in deep navy blue is complemented by contrasting silver zippers and emblems. Equipped with weather-resistant fabric and a removable hood, this jacket is your ultimate companion for extreme winter adventures.",
+    "Price": 239.99
+  },
+  {
+    "Id": 90,
+    "Type": "Navigation",
+    "Brand": "B&R",
+    "Name": "TrailTracker GPS Watch",
+    "Description": "Navigate the trails like a pro with the B&R TrailTracker GPS watch. This rugged and reliable watch features a built-in GPS that tracks your location, speed, and distance accurately. The sleek camo design with a vivid orange strap adds a sporty touch. With its long battery life and water-resistant construction, you can trust this watch to guide you through any outdoor expedition.",
+    "Price": 199.00
+  },
+  {
+    "Id": 91,
+    "Type": "Footwear",
+    "Brand": "WildRunner",
+    "Name": "Trailblazer Trail Running Shoes",
+    "Description": "Conquer any terrain in the Trailblazer Trail Running Shoes by WildRunner. These lightweight shoes come in vibrant blue and feature a rugged outsole for excellent traction, a breathable mesh upper for maximum comfort, and quick-drying materials to keep you dry on your adventures.",
+    "Price": 89.99
+  },
+  {
+    "Id": 92,
+    "Type": "Ski/boarding",
+    "Brand": "Daybird",
+    "Name": "Blizzard Snowboard",
+    "Description": "Take on the slopes with the Daybird Blizzard Snowboard. This powerful board features a sleek design in icy white, with a durable wood core, a versatile medium flex, and a precision base that allows for smooth rides and easy turns. Strap on and carve your way to glory.",
+    "Price": 449.99
+  },
+  {
+    "Id": 93,
+    "Type": "Climbing",
+    "Brand": "Raptor Elite",
+    "Name": "Summit Climbing Harness",
+    "Description": "Conquer the highest peaks with the Raptor Elite Summit Climbing Harness. This durable and lightweight harness, available in bold red, provides maximum comfort and safety while scaling tricky routes. Its adjustable waistband and leg loops ensure a snug fit, while the gear loops provide easy access to your equipment.",
+    "Price": 109.99
+  },
+  {
+    "Id": 94,
+    "Type": "Bags",
+    "Brand": "Gravitator",
+    "Name": "Gravity Hiking Backpack",
+    "Description": "Embark on unforgettable hikes with the Gravitator Gravity Hiking Backpack. Available in tiger stripes, this backpack offers a spacious main compartment, multiple pockets, and a hydration system compatible design. The lightweight and durable construction ensures maximum comfort on the trails.",
+    "Price": 79.99
+  },
+  {
+    "Id": 95,
+    "Type": "Cycling",
+    "Brand": "AirStrider",
+    "Name": "AeroLite Cycling Helmet",
+    "Description": "Stay safe and stylish on your cycling adventures with the AirStrider AeroLite Cycling Helmet. This helmet, in a glossy grey, features a lightweight design, adjustable straps, and excellent ventilation to keep you cool. The aerodynamic shape reduces air resistance, enabling you to pick up speed with confidence.",
+    "Price": 129.99
+  },
+  {
+    "Id": 96,
+    "Type": "Trekking",
+    "Brand": "B&R",
+    "Name": "Explorer Camping Tent",
+    "Description": "Experience the great outdoors with the B&R Explorer Camping Tent. This spacious tent, available in forest green, comfortably fits up to six people with a separate sleeping area and a generous living space. Its sturdy construction and weather-resistant materials ensure durability and protection from the elements.",
+    "Price": 279.99
+  },
+  {
+    "Id": 97,
+    "Type": "Bags",
+    "Brand": "Quester",
+    "Name": "Gravity Waterproof Dry Bag",
+    "Description": "Keep your essentials dry and secure with the Quester Gravity Waterproof Dry Bag. This versatile bag, in vibrant orange, features a roll-top closure system, adjustable shoulder straps, and durable PVC-coated fabric to withstand water, sand, and dirt. Ideal for adventures on land or water.",
+    "Price": 49.99
+  },
+  {
+    "Id": 98,
+    "Type": "Jackets",
+    "Brand": "Legend",
+    "Name": "Element Outdoor Jacket",
+    "Description": "Gear up for any adventure with the Legend Element Outdoor Jacket. Available in charcoal gray, this jacket offers ultimate protection with its waterproof and windproof shell. The breathable fabric and adjustable cuffs ensure comfort, allowing you to explore in any weather condition.",
+    "Price": 179.99
+  },
+  {
+    "Id": 99,
+    "Type": "Navigation",
+    "Brand": "Solstix",
+    "Name": "Adventurer GPS Watch",
+    "Description": "Take navigation to the next level with the Solstix Adventurer GPS Watch. This sleek and durable watch, in midnight blue, features a built-in GPS, altimeter, and compass, allowing you to track your routes and monitor your progress. With multiple sport modes, it's the ideal companion for outdoor enthusiasts.",
+    "Price": 199.99
+  },
+  {
+    "Id": 100,
+    "Type": "Trekking",
+    "Brand": "Green Equipment",
+    "Name": "EcoLite Trekking Poles",
+    "Description": "Tackle challenging trails with the Green Equipment EcoLite Trekking Poles. These lightweight poles, in vibrant green, feature adjustable height, shock-absorbing capabilities, and ergonomic cork handles for a comfortable grip. Whether ascending or descending, these poles provide stability and support.",
+    "Price": 79.99
+  },
+  {
+    "Id": 101,
+    "Type": "Footwear",
+    "Brand": "Raptor Elite",
+    "Name": "Trek Xtreme Hiking Shoes",
+    "Description": "The Trek Xtreme hiking shoes by Raptor Elite are built to endure any trail. With their durable leather upper and rugged rubber sole, they offer excellent traction and protection. These shoes come in a timeless brown color that adds a touch of style to your outdoor adventures.",
+    "Price": 135.99
   }
 ]
