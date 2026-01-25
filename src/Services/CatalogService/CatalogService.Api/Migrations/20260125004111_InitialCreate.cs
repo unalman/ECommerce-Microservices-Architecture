@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Pgvector;
 
 #nullable disable
 
@@ -12,6 +13,9 @@ namespace CatalogService.Api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:PostgresExtension:vector", ",,");
+
             migrationBuilder.CreateTable(
                 name: "CatalogBrand",
                 columns: table => new
@@ -70,6 +74,7 @@ namespace CatalogService.Api.Migrations
                     AvailableStock = table.Column<int>(type: "integer", nullable: false),
                     RestockThreshold = table.Column<int>(type: "integer", nullable: false),
                     MaxStockThreshold = table.Column<int>(type: "integer", nullable: false),
+                    Embedding = table.Column<Vector>(type: "vector(384)", nullable: true),
                     OnReorder = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>

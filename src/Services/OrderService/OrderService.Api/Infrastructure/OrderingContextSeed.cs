@@ -1,5 +1,4 @@
-﻿using OrderService.Api.Extensions;
-using OrderService.Domain.AggregateModels.BuyerAggregate;
+﻿using OrderService.Domain.AggregateModels.BuyerAggregate;
 using OrderService.Infrastructure;
 
 namespace OrderService.Api.Infrastructure

@@ -21,9 +21,11 @@ namespace CatalogService.Api.Extensions
                 return;
             }
 
-            builder.AddNpgsqlDbContext<CatalogContext>("catalogdb", configureDbContextOptions: dbContextOptionsBuilder =>
+            builder.AddNpgsqlDbContext<CatalogContext>("CatalogDB", configureDbContextOptions: dbContextOptionsBuilder =>
             {
-                dbContextOptionsBuilder.UseNpgsql();
+                dbContextOptionsBuilder.UseNpgsql(builder => {
+                    builder.UseVector();
+                });
             });
 
             // REVIEW: This is done for development ease but shouldn't be here in production
@@ -33,7 +35,7 @@ namespace CatalogService.Api.Extensions
             builder.Services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<CatalogContext>>();
             builder.Services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
 
-            builder.AddRabbitMqzEventBus("eventbus")
+            builder.AddRabbitMqEventBus("eventbus")
                 .AddSubscription<OrderStatusChangedToAwaitingValidationIntegrationEvent, OrderStatusChangedToAwaitingValidationIntegrationEventHandler>()
                 .AddSubscription<OrderStatusChangedToPaidIntegrationEvent, OrderStatusChangedToPaidIntegrationEventHandler>();
 

@@ -8,7 +8,7 @@ public static class RabbitMqDependencyInjectionExtensions
 {
     private const string SectionName = "EventBus";
 
-    public static IEventBusBuilder AddRabbitMqzEventBus(this IHostApplicationBuilder builder, string connectionName)
+    public static IEventBusBuilder AddRabbitMqEventBus(this IHostApplicationBuilder builder, string connectionName)
     {
         ArgumentNullException.ThrowIfNull(builder);
 

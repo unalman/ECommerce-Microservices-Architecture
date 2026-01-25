@@ -31,7 +31,7 @@ namespace OrderService.Api.Extensions
 
             services.AddDbContext<OrderingContext>(options =>
             {
-                options.UseNpgsql(builder.Configuration.GetConnectionString("orderingdb"));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("OrderingDB"));
             });
             builder.EnrichNpgsqlDbContext<OrderingContext>();
 
@@ -41,7 +41,7 @@ namespace OrderService.Api.Extensions
 
             services.AddTransient<IOrderingIntegrationEventService, OrderingIntegrationEventService>();
 
-            builder.AddRabbitMqzEventBus("eventbus")
+            builder.AddRabbitMqEventBus("eventbus")
                 .AddEventBusSubscription();
 
             services.AddHttpContextAccessor();

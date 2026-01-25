@@ -6,13 +6,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using Pgvector;
 
 #nullable disable
 
 namespace CatalogService.Api.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20260103091231_InitialCreate")]
+    [Migration("20260125004111_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -23,6 +24,7 @@ namespace CatalogService.Api.Migrations
                 .HasAnnotation("ProductVersion", "9.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "vector");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("CatalogService.Api.Core.Domain.CatalogBrand", b =>
@@ -62,6 +64,9 @@ namespace CatalogService.Api.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<Vector>("Embedding")
+                        .HasColumnType("vector(384)");
 
                     b.Property<int>("MaxStockThreshold")
                         .HasColumnType("integer");

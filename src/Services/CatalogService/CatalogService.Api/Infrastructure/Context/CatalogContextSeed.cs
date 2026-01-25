@@ -1,7 +1,6 @@
 ﻿using CatalogService.Api.Core.Domain;
 using CatalogService.Api.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Npgsql;
 using Pgvector;
@@ -27,7 +26,7 @@ namespace CatalogService.Api.Infrastructure.Context
 
             if (!context.CatalogItems.Any())
             {
-                var sourcePath = Path.Combine(contentRootPath, "Setup", "catalog.json");
+                var sourcePath = Path.Combine(contentRootPath, "Infrastructure", "Setup", "catalog.json");
                 var sourceJson = File.ReadAllText(sourcePath);
                 var sourceItems = JsonSerializer.Deserialize<CatalogSourceEntry[]>(sourceJson) ?? Array.Empty<CatalogSourceEntry>();
 

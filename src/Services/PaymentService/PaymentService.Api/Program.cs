@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddRabbitMqzEventBus("EventBus")
+builder.AddRabbitMqEventBus("EventBus")
     .AddSubscription<OrderStatusChangedToStockConfirmedIntegrationEvent, OrderStatusChangedToStockConfirmedIntegrationEventHandler>();
 
 builder.Services.AddOptions<PaymentOptions>()
@@ -18,4 +18,4 @@ var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-app.Run();
+await app.RunAsync();

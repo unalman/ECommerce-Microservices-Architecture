@@ -17,7 +17,7 @@ namespace BasketService.Api.Extensions
 
             builder.Services.AddSingleton<IBasketRepository, RedisBasketRepository>();
 
-            builder.AddRabbitMqzEventBus("eventbus")
+            builder.AddRabbitMqEventBus("eventbus")
                 .AddSubscription<OrderStartedIntegrationEvent, OrderStartedIntegrationEventHandler>()
                 .ConfigureJsonOptions(options => options.TypeInfoResolverChain.Add(IntegrationEventContext.Default));
         }

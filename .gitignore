@@ -12,3 +12,6 @@ obj/
 
 # Node gibi projelerde modüller
 node_modules/
+
+*.user
+*.suo

@@ -6,34 +6,43 @@ namespace OrderService.Infrastructure.EntityConfiguration
 {
     class PaymentMethodEntityTypeConfiguration : IEntityTypeConfiguration<PaymentMethod>
     {
-        public void Configure(EntityTypeBuilder<PaymentMethod> builder)
+        public void Configure(EntityTypeBuilder<PaymentMethod> paymentConfiguration)
         {
-            builder.ToTable("paymentmethods");
+            paymentConfiguration.ToTable("paymentmethods");
 
-            builder.Ignore(x => x.DomainEvents);
+            paymentConfiguration.Ignore(b => b.DomainEvents);
 
-            builder.Property(c => c.Id)
+            paymentConfiguration.Property(b => b.Id)
                 .UseHiLo("paymentseq");
 
-            builder.Property<int>("BuyerId");
+            paymentConfiguration.Property<int>("BuyerId");
 
-            builder.Property("_cardHolderName")
+            paymentConfiguration
+                .Property("_cardHolderName")
                 .HasColumnName("CardHolderName")
                 .HasMaxLength(200);
 
-            builder.Property("_alias")
+            paymentConfiguration
+                .Property("_alias")
                 .HasColumnName("Alias")
                 .HasMaxLength(200);
 
-            builder.Property("_cardNumber")
-                .HasColumnName("Alias")
+            paymentConfiguration
+                .Property("_cardNumber")
+                .HasColumnName("CardNumber")
                 .HasMaxLength(25)
                 .IsRequired();
 
-            builder.Property("_cardTypeId")
+            paymentConfiguration
+                .Property("_expiration")
+                .HasColumnName("Expiration")
+                .HasMaxLength(25);
+
+            paymentConfiguration
+                .Property("_cardTypeId")
                 .HasColumnName("CardTypeId");
 
-            builder.HasOne(x => x.CardType)
+            paymentConfiguration.HasOne(p => p.CardType)
                 .WithMany()
                 .HasForeignKey("_cardTypeId");
         }

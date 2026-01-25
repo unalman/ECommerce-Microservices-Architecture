@@ -12,6 +12,23 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.CognitiveServices" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Yarp" Version="13.1.0" />
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Ollama" Version="9.8.0-beta.395" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Client\MVCWebApp\WebApp\WebApp.csproj" />
+    <ProjectReference Include="..\..\Client\WebHooks.API\WebHooks.API.csproj" />
+    <ProjectReference Include="..\..\Services\BasketService\BasketService.Api\BasketService.Api.csproj" />
+    <ProjectReference Include="..\..\Services\CatalogService\CatalogService.Api\CatalogService.Api.csproj" />
+    <ProjectReference Include="..\..\Services\IdentityService\IdentityService.Api\IdentityService.Api.csproj" />
+    <ProjectReference Include="..\..\Services\OrderService\OrderProcessor\OrderProcessor.csproj" />
+    <ProjectReference Include="..\..\Services\OrderService\OrderService.Api\OrderService.Api.csproj" />
+    <ProjectReference Include="..\..\Services\PaymentService\PaymentService.Api\PaymentService.Api.csproj" />
   </ItemGroup>
 
 </Project>

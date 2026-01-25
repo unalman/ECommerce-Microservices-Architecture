@@ -83,7 +83,6 @@ namespace IntegrationEventLogEF.Services
                     _context.Dispose();
                 }
 
-
                 _disposedValue = true;
             }
         }

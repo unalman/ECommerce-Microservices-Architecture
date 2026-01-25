@@ -1,17 +1,17 @@
 ﻿
 services:
   ecommercedb:
-    image: postgres:latest
+    image: pgvector/pgvector:pg16
     environment:
       POSTGRES_USER: unalman
       POSTGRES_PASSWORD: unalman
-      POSTGRES_DB: catalogdb
+      POSTGRES_DB: CatalogDB
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready -U postgres -d catalogdb"]
+      test: ["CMD", "pg_isready -U postgres -d CatalogDB"]
       interval: 10s
       timeout: 5s
       retries: 5

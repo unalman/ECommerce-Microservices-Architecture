@@ -14,7 +14,7 @@ namespace OrderService.Api.Application.DomainEventHandlers
         private readonly IBuyerRepository _buyerRepository;
         private readonly IOrderingIntegrationEventService _orderingIntegrationEventService;
 
-        public ValidateOrAddBuyerAggregateWhenOrderStartedDomainEventHandler(ILogger logger,
+        public ValidateOrAddBuyerAggregateWhenOrderStartedDomainEventHandler(ILogger<ValidateOrAddBuyerAggregateWhenOrderStartedDomainEventHandler> logger,
             IBuyerRepository buyerRepository,
             IOrderingIntegrationEventService orderingIntegrationEventService)
         {
