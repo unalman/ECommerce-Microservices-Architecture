@@ -1,4 +1,4 @@
-﻿namespace eShop.Identity.API.Models.ConsentViewModels
+﻿namespace IdentityService.API.Models.ConsentViewModels
 {
     public class ConsentOptions
     {

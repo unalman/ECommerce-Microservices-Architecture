@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.AppHost", "src\Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHooks.API", "src\Client\WebHooks.API\WebHooks.API.csproj", "{53B9B6A6-E3EA-47C6-B9EE-F7FA6BBC0697}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppComponents", "src\Client\MVCWebApp\WebAppComponents\WebAppComponents.csproj", "{8F93DDF0-578B-4CAF-963E-3AC2A040F233}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,10 @@ Global
 		{53B9B6A6-E3EA-47C6-B9EE-F7FA6BBC0697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53B9B6A6-E3EA-47C6-B9EE-F7FA6BBC0697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53B9B6A6-E3EA-47C6-B9EE-F7FA6BBC0697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F93DDF0-578B-4CAF-963E-3AC2A040F233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F93DDF0-578B-4CAF-963E-3AC2A040F233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F93DDF0-578B-4CAF-963E-3AC2A040F233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F93DDF0-578B-4CAF-963E-3AC2A040F233}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +204,7 @@ Global
 		{B2DF68A5-D623-49DD-8636-730205CFA127} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{4AD73287-2656-4A16-918E-E93EA8ACC888} = {B2DF68A5-D623-49DD-8636-730205CFA127}
 		{53B9B6A6-E3EA-47C6-B9EE-F7FA6BBC0697} = {10083829-B8EC-4F15-8E26-518535251209}
+		{8F93DDF0-578B-4CAF-963E-3AC2A040F233} = {39998EAE-6E28-4712-8681-EC58C505B205}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D31A4A15-774D-45B1-AAC2-687B4AB2577D}

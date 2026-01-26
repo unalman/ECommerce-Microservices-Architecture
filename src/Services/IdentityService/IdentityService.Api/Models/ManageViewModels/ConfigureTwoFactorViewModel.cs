@@ -1,4 +1,4 @@
-﻿namespace eShop.Identity.API.Models.ManageViewModels
+﻿namespace IdentityService.API.Models.ManageViewModels
 {
     public record ConfigureTwoFactorViewModel
     {

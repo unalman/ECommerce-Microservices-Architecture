@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using OrderService.Api.Application.Commands;
 
-namespace eShop.Ordering.API.Application.Validations;
+namespace OrderService.API.Application.Validations;
 
 public class IdentifiedCommandValidator : AbstractValidator<IdentifiedCommand<CreateOrderCommand, bool>>
 {

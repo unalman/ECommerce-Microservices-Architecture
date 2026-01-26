@@ -40,7 +40,7 @@ internal static class Extensions
     }
 
     /// <summary>
-    /// Configures eShop projects to use OpenAI for text embedding and chat.
+    /// Configures ECommerce projects to use OpenAI for text embedding and chat.
     /// </summary>
     public static IDistributedApplicationBuilder AddOpenAI(this IDistributedApplicationBuilder builder,
         IResourceBuilder<ProjectResource> catalogApi,
@@ -152,7 +152,7 @@ internal static class Extensions
     }
 
     /// <summary>
-    /// Configures eShop projects to use Ollama for text embedding and chat.
+    /// Configures ECommerce projects to use Ollama for text embedding and chat.
     /// </summary>
     public static IDistributedApplicationBuilder AddOllama(this IDistributedApplicationBuilder builder,
         IResourceBuilder<ProjectResource> catalogApi,

@@ -1,4 +1,4 @@
-﻿namespace eShop.Identity.API.Models.AccountViewModels
+﻿namespace IdentityService.API.Models.AccountViewModels
 {
     public record RegisterViewModel
     {
