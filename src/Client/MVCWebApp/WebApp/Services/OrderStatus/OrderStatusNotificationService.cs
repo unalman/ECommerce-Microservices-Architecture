@@ -5,7 +5,7 @@
         private readonly object _subscriptionLock = new();
         private readonly Dictionary<string, HashSet<Subscription>> _subscriptionsByBuyerId = new();
 
-        public IDisposable SubscribeToOrderStatusNotification(string buyerId, Func<Task> callback) {
+        public IDisposable SubscribeToOrderStatusNotifications(string buyerId, Func<Task> callback) {
             var subscription = new Subscription(this, buyerId, callback);
 
             lock (_subscriptionLock) {
