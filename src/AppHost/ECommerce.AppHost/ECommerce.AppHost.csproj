@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Client\MVCWebApp\WebApp\WebApp.csproj" />
+    <ProjectReference Include="..\..\Client\WebHookClient\WebHookClient.csproj" />
     <ProjectReference Include="..\..\Client\WebHooks.API\WebHooks.API.csproj" />
     <ProjectReference Include="..\..\Services\BasketService\BasketService.Api\BasketService.Api.csproj" />
     <ProjectReference Include="..\..\Services\CatalogService\CatalogService.Api\CatalogService.Api.csproj" />
