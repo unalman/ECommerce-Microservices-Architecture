@@ -65,16 +65,21 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
 
         public void AddOrderItem(int productId, string productName, decimal unitPrice, decimal discount, string pictureUrl, int units = 1)
         {
-            var existingOrderForProduct = _orderItems.SingleOrDefault(x => x.ProductId == productId);
+            var existingOrderForProduct = _orderItems.SingleOrDefault(o => o.ProductId == productId);
+
             if (existingOrderForProduct != null)
             {
+                //if previous line exist modify it with higher discount  and units..
                 if (discount > existingOrderForProduct.Discount)
+                {
                     existingOrderForProduct.SetNewDiscount(discount);
+                }
 
                 existingOrderForProduct.AddUnits(units);
             }
             else
             {
+                //add validated new order item
                 var orderItem = new OrderItem(productId, productName, unitPrice, discount, pictureUrl, units);
                 _orderItems.Add(orderItem);
             }

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Aspire.AppHost.Sdk/13.0.0">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+		<IsPublishable>false</IsPublishable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Asp.Versioning.Http.Client" Version="8.1.0" />
+		<PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.12" />
+		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.12" />
+		<PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Services\CatalogService\CatalogService.Api\CatalogService.Api.csproj" IsAspireProjectResource="false" />
+	</ItemGroup>
+
+</Project>

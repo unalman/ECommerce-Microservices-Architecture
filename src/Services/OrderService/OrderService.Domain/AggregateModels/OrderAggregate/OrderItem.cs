@@ -59,7 +59,7 @@ namespace OrderService.Domain.AggregateModels.OrderAggregate
             {
                 throw new OrderingDomainException("Invalid units");
             }
-            Units = units;
+            Units += units;
         }
     }
 }

@@ -24,3 +24,5 @@ orders.MapOrdersApiV1()
 app.UseDefaultOpenApi();
 
 app.Run();
+
+public partial class Program { }

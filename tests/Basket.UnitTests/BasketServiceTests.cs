@@ -4,7 +4,6 @@ using ECommerce.Basket.UnitTests.Helpers;
 using ECommerce.BasketService.Api.Grpc;
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Security.Claims;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BasketItem = BasketService.Api.Core.Domain.BasketItem;
 using BasketServiceBase = BasketService.Api.Grpc.BasketService;
 

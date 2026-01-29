@@ -22,3 +22,7 @@ app.MapCatalogApi();
 app.UseDefaultOpenApi();
 
 app.Run();
+
+
+public partial class Program { }
+

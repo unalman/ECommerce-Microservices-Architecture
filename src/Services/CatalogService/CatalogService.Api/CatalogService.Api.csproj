@@ -4,6 +4,8 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>CatalogService.Api</RootNamespace>
+		<AssemblyName>CatalogService.Api</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -37,6 +39,10 @@
 	  <ProjectReference Include="..\..\..\..\IntegrationEventLogEF\IntegrationEventLogEF.csproj" />
 	  <ProjectReference Include="..\..\..\BuildingBlocks\EventBus\EventBus.RabbitMQ\EventBus.RabbitMQ.csproj" />
 	  <ProjectReference Include="..\..\ServiceDefaults\ServiceDefaults.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Catalog.FunctionalTests" />
 	</ItemGroup>
 
 </Project>

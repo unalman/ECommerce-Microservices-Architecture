@@ -21,11 +21,11 @@ namespace OrderService.Api.Application.Commands
         private readonly IOrderingIntegrationEventService _orderingIntegrationEventService;
         private readonly ILogger<CreateOrderCommandHandler> _logger;
 
-        public CreateOrderCommandHandler(IOrderRepository orderRepository,
-            IIdentityService identityService,
-            IMediator mediator,
-            IEventBus eventBus,
+        // Using DI to inject infrastructure persistence Repositories
+        public CreateOrderCommandHandler(IMediator mediator,
             IOrderingIntegrationEventService orderingIntegrationEventService,
+            IOrderRepository orderRepository,
+            IIdentityService identityService,
             ILogger<CreateOrderCommandHandler> logger)
         {
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
@@ -37,22 +37,27 @@ namespace OrderService.Api.Application.Commands
 
         public async Task<bool> Handle(CreateOrderCommand message, CancellationToken cancellationToken)
         {
+            // Add Integration event to clean the basket
             var orderStartedIntegrationEvent = new OrderStartedIntegrationEvent(message.UserId);
             await _orderingIntegrationEventService.AddAndSaveEventAsync(orderStartedIntegrationEvent);
 
+            // Add/Update the Buyer AggregateRoot
+            // DDD patterns comment: Add child entities and value-objects through the Order Aggregate-Root
+            // methods and constructor so validations, invariants and business logic 
+            // make sure that consistency is preserved across the whole aggregate
             var address = new Address(message.Street, message.City, message.State, message.Country, message.ZipCode);
             var order = new Order(message.UserId, message.UserName, address, message.CardTypeId, message.CardNumber, message.CardSecurityNumber, message.CardHolderName, message.CardExpiration);
+
             foreach (var item in message.OrderItems)
             {
                 order.AddOrderItem(item.ProductId, item.ProductName, item.UnitPrice, item.Discount, item.PictureUrl, item.Units);
             }
+
             _logger.LogInformation("Creating Order - Order: {@Order}", order);
 
             _orderRepository.Add(order);
 
-            await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-
-            return true;
+            return await _orderRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
     }
 

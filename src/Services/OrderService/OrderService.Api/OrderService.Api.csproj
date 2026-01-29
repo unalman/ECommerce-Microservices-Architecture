@@ -29,4 +29,8 @@
 		<ProjectReference Include="..\OrderService.Infrastructure\OrderService.Infrastructure.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="Ordering.FunctionalTests" />
+	</ItemGroup>
+
 </Project>
