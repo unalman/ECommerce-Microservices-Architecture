@@ -1,5 +1,6 @@
 ﻿using EventBus.Base.Abstraction;
 using EventBus.Base.Extensions;
+using ServiceDefaults;
 using WebHooks.API.Infrastructure;
 using WebHooks.API.IntegrationEvents;
 using WebHooks.API.Services;
@@ -10,7 +11,7 @@ namespace WebHooks.API.Extensions
     {
         public static void AddApplicationServices(this IHostApplicationBuilder builder)
         {
-            builder.AddApplicationServices();
+            builder.AddDefaultAuthentication();
 
             builder.AddRabbitMqEventBus("eventbus")
            .AddEventBusSubscriptions();
